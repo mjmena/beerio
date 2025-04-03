@@ -33,6 +33,8 @@
         devShells.default = pkgs.mkShell
           {
             buildInputs = leptosPackages;
+            packages = [ pkgs.just pkgs.bacon pkgs.watchexec ];
+
             CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "lld";
 
           };
