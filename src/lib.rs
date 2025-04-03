@@ -17,7 +17,7 @@ pub fn App() -> impl IntoView {
         <Router>
             <Routes fallback=SeedForm >
                 <Route path=path!("/") view=SeedForm/>
-                <Route path=path!("/:seed/:player") view=SeedDisplay/>
+                <Route path=path!("/:seed") view=SeedDisplay/>
             </Routes>
         </Router>
     }

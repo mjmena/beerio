@@ -10,12 +10,12 @@ pub fn SeedForm() -> impl IntoView {
             .get("player")
             .unwrap_or_default()
             .parse()
-            .unwrap_or_default(),
+            .unwrap_or(1),
     );
-    let seed = RwSignal::new(query.read().get("seed").unwrap_or_default());
+    let seed = RwSignal::new(query.read().get("seed").unwrap_or("seed".to_string()));
 
     view! {
-        <Form method="GET" action= move || format!("/{}/{}", seed.get(), player.get())>
+        <Form method="GET" action= move || format!("/{}", seed.get())>
 
             <div class="min-h-screen bg-gray-100 flex flex-col items-center">
             {/* Centered container for seed input */}
@@ -43,6 +43,7 @@ pub fn SeedForm() -> impl IntoView {
                             <input
                                 type="radio"
                                 id=format!("player_{}", player_num)
+                                name="player"
                                 value=player_num
                                 class="absolute opacity-0 w-0 h-0"
                                 checked=is_selected
