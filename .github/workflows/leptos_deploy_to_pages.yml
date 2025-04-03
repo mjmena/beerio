@@ -31,11 +31,12 @@ jobs:
       - uses: actions/checkout@v4 # repo checkout
 
       # Install Rust Nightly Toolchain, with Clippy & Rustfmt
-      - name: Install nightly Rust
-        uses: dtolnay/rust-toolchain@nightly
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
         with:
-          components: clippy, rustfmt
-
+            toolchain: stable
+            override: true
+            components: rustfmt, clippy
       - name: Add WASM target
         run: rustup target add wasm32-unknown-unknown
 
