@@ -5,8 +5,8 @@ use leptos_router::{
 };
 
 use hex;
-// use rand::{SeedableRng, seq::SliceRandom};
-// use rand_chacha::ChaCha20Rng;
+use rand::{SeedableRng, seq::SliceRandom};
+use rand_chacha::ChaCha20Rng;
 use sha2::{Digest, Sha256};
 
 use crate::{
@@ -40,23 +40,21 @@ pub fn SeedDisplay() -> impl IntoView {
             .unwrap_or(1)
     };
 
-    let _hash = move || generate_seed_hash(seed().clone(), round());
+    let hash = move || generate_seed_hash(seed().clone(), round());
 
-    // let rules = move || generate_numbers_from_hash(hash(), 12, 0, RULES.len() - 1);
-    // let rule = Signal::derive(move || {
-    //      *rules()
-    //          .get(player() - 1)
-    //          .expect("rules vector should be generated now")
-    //  });
-
-    let rule = Signal::derive(|| 1);
+    let rules = move || generate_numbers_from_hash(hash(), 12, 0, RULES.get().unwrap().len() - 1);
+    let rule = Signal::derive(move || {
+        *rules()
+            .get(player() - 1)
+            .expect("rules vector should be generated now")
+    });
 
     view! {
         <div class="min-h-screen bg-gray-100 flex flex-col items-center">
             {move || format!("{:?}", RULES)}
             <RuleDisplay rule/>
             <div class="w-full max-w-md p-6">
-            <A href=move || format!("/beerio/?seed={}&player={}", seed(), player()) >
+            <A href=move || format!("/?seed={}&player={}", seed(), player()) >
                 <Button>BACK</Button>
             </A>
             <A href=move ||  format!("?player={}&round={}", player(), round()+1)>
@@ -87,14 +85,14 @@ fn generate_seed_hash(seed: String, iterations: usize) -> [u8; 32] {
     seed_bytes
 }
 
-// fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
-//     // Create a stable seed from the input string
-//     // Use ChaCha20 RNG - guaranteed portable and stable
-//     let mut rng = ChaCha20Rng::from_seed(seed);
+fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
+    // Create a stable seed from the input string
+    // Use ChaCha20 RNG - guaranteed portable and stable
+    let mut rng = ChaCha20Rng::from_seed(seed);
 
-//     // Generate and shuffle the range
-//     let mut numbers: Vec<usize> = (min..=max).collect();
-//     numbers.shuffle(&mut rng);
+    // Generate and shuffle the range
+    let mut numbers: Vec<usize> = (min..=max).collect();
+    numbers.shuffle(&mut rng);
 
-//     numbers.into_iter().take(count).collect()
-// }
+    numbers.into_iter().take(count).collect()
+}
