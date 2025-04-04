@@ -46,7 +46,7 @@ pub fn SeedDisplay() -> impl IntoView {
     let rule = Signal::derive(move || {
         *rules()
             .get(player() - 1)
-            .expect("rules vector is generated")
+            .expect("rules vector should be generated now")
     });
 
     view! {
