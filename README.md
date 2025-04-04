@@ -1,0 +1,16 @@
+TODO
+- [x] generate random mission from seed
+  - [x] display mission to player 
+  - [ ] verify seed randomness is portable and unique 
+- [x] create a round system to allow quickly getting a new unqiue mission
+  - [x] display round information
+  - [x] allow player to navigate between rounds
+- [ ] generate random mission requirements if necessary
+  - [ ] random items
+  - [ ] random karts
+  - [ ] random wheels
+  - [ ] random gliders
+- [ ] navigation bar
+  - [ ] homepage
+  - [ ] beerio kart rule page
+  - [ ] mission showcase page
