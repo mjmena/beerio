@@ -1,4 +1,4 @@
-use std::sync::LazyLock;
+use std::sync::OnceLock;
 
 use leptos::prelude::*;
 use leptos_router::{
@@ -13,11 +13,22 @@ use serde::Deserialize;
 
 #[component]
 pub fn App() -> impl IntoView {
+    let result = RULES.set(
+        toml::from_str::<Rules>(include_str!(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/rules.toml"
+        )))
+        .unwrap()
+        .rules,
+    );
+
+    result.unwrap();
+
     view! {
-        <Router>
+        <Router base="/beerio".to_string() >
             <Routes fallback=SeedForm >
                 <Route path=path!("/") view=SeedForm/>
-               <Route path=path!("/:seed") view=SeedDisplay/>
+               <Route path=path!(":seed") view=SeedDisplay/>
             </Routes>
         </Router>
     }
@@ -35,11 +46,4 @@ struct Rules {
     rules: Vec<Rule>,
 }
 
-pub static RULES: LazyLock<Vec<Rule>> = std::sync::LazyLock::new(|| {
-    toml::from_str::<Rules>(include_str!(concat!(
-        env!("CARGO_MANIFEST_DIR"),
-        "/rules.toml"
-    )))
-    .unwrap()
-    .rules
-});
+pub static RULES: OnceLock<Vec<Rule>> = std::sync::OnceLock::new();

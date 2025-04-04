@@ -56,10 +56,10 @@ pub fn SeedDisplay() -> impl IntoView {
             {move || format!("{:?}", RULES)}
             <RuleDisplay rule/>
             <div class="w-full max-w-md p-6">
-            <A href=move || format!("/?seed={}&player={}", seed(), player()) >
+            <A href=move || format!("/beerio/?seed={}&player={}", seed(), player()) >
                 <Button>BACK</Button>
             </A>
-            <A href=move ||  format!("/{}?player={}&round={}", seed(), player(), round()+1)>
+            <A href=move ||  format!("?player={}&round={}", player(), round()+1)>
                 <Button>NEXT</Button>
             </A>
             </div>
