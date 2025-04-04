@@ -14,13 +14,13 @@ use serde::Deserialize;
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-            <Router>
-                <Routes fallback=SeedForm >
-                    <Route path=path!("/") view=SeedForm/>
-    //                <Route path=path!("/:seed") view=SeedDisplay/>
-                </Routes>
-            </Router>
-        }
+        <Router>
+            <Routes fallback=SeedForm >
+                <Route path=path!("/") view=SeedForm/>
+               <Route path=path!("/:seed") view=SeedDisplay/>
+            </Routes>
+        </Router>
+    }
 }
 
 #[derive(Debug, Deserialize, Clone)]
