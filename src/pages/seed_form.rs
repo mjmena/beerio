@@ -20,7 +20,7 @@ pub fn SeedForm() -> impl IntoView {
             <div class="min-h-screen bg-gray-100 flex flex-col items-center">
             {/* Centered container for seed input */}
             <div class="w-full max-w-md p-6">
-                <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Choose Your Player</h1>
+                <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
 
                 {/* Normal-sized seed input */}
                 <div class="mb-6">
@@ -32,6 +32,7 @@ pub fn SeedForm() -> impl IntoView {
                         bind:value=seed
                     />
                 </div>
+               <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Choose Your Player</h1>
             </div>
 
             {/* Player selection grid (unchanged) */}
