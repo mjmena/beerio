@@ -9,7 +9,10 @@ use rand::{SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 use sha2::{Digest, Sha256};
 
-use crate::components::{css::Button, rule_display::RuleDisplay};
+use crate::{
+    RULES,
+    components::{css::Button, rule_display::RuleDisplay},
+};
 
 #[component]
 pub fn SeedDisplay() -> impl IntoView {
@@ -39,7 +42,7 @@ pub fn SeedDisplay() -> impl IntoView {
 
     let hash = move || generate_seed_hash(seed().clone(), round());
 
-    let rules = move || generate_numbers_from_hash(hash(), 12, 0, 12);
+    let rules = move || generate_numbers_from_hash(hash(), 12, 0, RULES.len() - 1);
     let rule = Signal::derive(move || {
         *rules()
             .get(player() - 1)
@@ -82,13 +85,13 @@ fn generate_seed_hash(seed: String, iterations: usize) -> [u8; 32] {
     seed_bytes
 }
 
-fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: u32, max: u32) -> Vec<u32> {
+fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
     // Create a stable seed from the input string
     // Use ChaCha20 RNG - guaranteed portable and stable
     let mut rng = ChaCha20Rng::from_seed(seed);
 
     // Generate and shuffle the range
-    let mut numbers: Vec<u32> = (min..=max).collect();
+    let mut numbers: Vec<usize> = (min..=max).collect();
     numbers.shuffle(&mut rng);
 
     numbers.into_iter().take(count).collect()
