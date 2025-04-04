@@ -17,6 +17,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  
   Github-Pages-Release:
 
     timeout-minutes: 10
@@ -28,6 +29,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: List files (debug)
+        run: ls -R
+      
       - uses: actions/checkout@v4 # repo checkout
 
       # Install Rust Nightly Toolchain, with Clippy & Rustfmt
