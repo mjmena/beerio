@@ -36,7 +36,10 @@ struct Rules {
 }
 
 pub static RULES: LazyLock<Vec<Rule>> = std::sync::LazyLock::new(|| {
-    toml::from_str::<Rules>(include_str!("../rules.toml"))
-        .unwrap()
-        .rules
+    toml::from_str::<Rules>(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/rules.toml"
+    )))
+    .unwrap()
+    .rules
 });
