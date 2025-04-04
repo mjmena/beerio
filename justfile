@@ -1,3 +1,2 @@
 default:
-    bacon
-    trunk serve --open
+    watchexec -r trunk serve
