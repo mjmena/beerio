@@ -42,7 +42,7 @@ pub fn SeedDisplay() -> impl IntoView {
 
     let hash = move || generate_seed_hash(seed().clone(), round());
 
-    let rules = move || generate_numbers_from_hash(hash(), 12, 0, RULES.len() - 1);
+    let rules = move || generate_numbers_from_hash(hash(), 12, 0, 13 - 1);
     let rule = Signal::derive(move || {
         *rules()
             .get(player() - 1)
