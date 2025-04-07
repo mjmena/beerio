@@ -1,6 +1,8 @@
 use leptos::prelude::*;
 use leptos_router::{components::Form, hooks::use_query_map};
 
+use crate::components::layout::Navbar;
+
 #[component]
 pub fn SeedForm() -> impl IntoView {
     let query = use_query_map();
@@ -16,9 +18,9 @@ pub fn SeedForm() -> impl IntoView {
 
     view! {
         <Form method="GET" action= move || format!("/{}", seed.get())>
-
-            <div class="min-h-screen bg-gray-100 flex flex-col items-center">
+            <div class="min-h-screen bg-gray-100 flex flex-col items-center pb-16">
             {/* Centered container for seed input */}
+
             <div class="w-full max-w-md p-6">
                 <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
 
@@ -69,6 +71,7 @@ pub fn SeedForm() -> impl IntoView {
                 }).collect::<Vec<_>>()}
             </div>
 
+            <input type="hidden" value="1" name="round"/>
             {/* Normal-sized centered submit button */}
             <div class="w-full max-w-md p-6">
                 <button
@@ -82,5 +85,6 @@ pub fn SeedForm() -> impl IntoView {
             </div>
         </div>
         </Form>
+        <Navbar/>
     }
 }

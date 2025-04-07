@@ -8,7 +8,7 @@ use leptos_router::{
 
 mod components;
 mod pages;
-use pages::{seed_display::SeedDisplay, seed_form::SeedForm};
+use pages::{rules_display::RulesDisplay, seed_display::SeedDisplay, seed_form::SeedForm};
 use serde::Deserialize;
 
 #[component]
@@ -26,9 +26,10 @@ pub fn App() -> impl IntoView {
 
     view! {
         <Router base="/beerio".to_string() >
-            <Routes fallback=SeedForm >
+            <Routes fallback=|| "error">
                 <Route path=path!("/") view=SeedForm/>
-               <Route path=path!(":seed") view=SeedDisplay/>
+                <Route path=path!("rules") view=RulesDisplay />
+                <Route path=path!(":seed") view=SeedDisplay/>
             </Routes>
         </Router>
     }

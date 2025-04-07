@@ -11,7 +11,7 @@ use sha2::{Digest, Sha256};
 
 use crate::{
     RULES,
-    components::{css::Button, rule_display::RuleDisplay},
+    components::{css::Button, layout::Navbar, rule_display::RuleDisplay},
 };
 
 #[component]
@@ -28,7 +28,7 @@ pub fn SeedDisplay() -> impl IntoView {
             .get("player")
             .unwrap_or_default()
             .parse::<usize>()
-            .unwrap_or_default()
+            .unwrap_or(1)
     };
 
     let round = move || {
@@ -68,6 +68,7 @@ pub fn SeedDisplay() -> impl IntoView {
                 </div>
             </div>
         </div>
+        <Navbar />
 
     }
 }
