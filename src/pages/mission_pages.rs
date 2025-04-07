@@ -3,7 +3,7 @@ use leptos_router::{components::A, hooks::use_params_map};
 
 use crate::{
     MISSIONS,
-    components::{css::Button, layout::Navbar, mission::MissionView},
+    components::{css::Button, mission::MissionView},
 };
 
 #[component]
@@ -42,7 +42,6 @@ pub fn MissionPage() -> impl IntoView {
                 </Show>
             </div>
         </div>
-        <Navbar/>
     }
 }
 
@@ -59,7 +58,6 @@ pub fn MissionListPage() -> impl IntoView {
         <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">
             {missions_list_view}
         </div>
-        <Navbar />
 
     }
 }

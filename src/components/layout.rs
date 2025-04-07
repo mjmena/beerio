@@ -1,11 +1,12 @@
 use leptos::prelude::*;
-use leptos_router::hooks::use_params_map;
+use leptos_router::{components::Outlet, hooks::use_params_map};
 
 #[component]
 pub fn Navbar() -> impl IntoView {
     let params = use_params_map();
     let seed = move || params.read().get("seed").unwrap_or_default();
     view! {
+        <Outlet />
         <nav class="bg-blue-600 text-white fixed bottom-0 w-full  ">
             <div class="flex justify-around items-center h-16">
                 <a href=move || format!("/beerio/?seed={}", seed()) class="flex flex-col items-center justify-center p-2">

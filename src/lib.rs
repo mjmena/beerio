@@ -1,8 +1,9 @@
 use std::sync::LazyLock;
 
+use components::layout::Navbar;
 use leptos::prelude::*;
 use leptos_router::{
-    components::{Route, Router, Routes},
+    components::{ParentRoute, Route, Router, Routes},
     path,
 };
 
@@ -20,10 +21,12 @@ pub fn App() -> impl IntoView {
     view! {
         <Router base="/beerio".to_string() >
             <Routes fallback=|| "error">
-                <Route path=path!("/") view=SeedForm/>
-                <Route path=path!("missions") view=MissionListPage />
-                <Route path=path!("missions/:mission") view=MissionPage />
-                <Route path=path!(":seed") view=SeedView />
+                <ParentRoute path=path!("/") view = Navbar>
+                    <Route path=path!("") view=SeedForm/>
+                    <Route path=path!("missions") view=MissionListPage />
+                    <Route path=path!("missions/:mission") view=MissionPage />
+                    <Route path=path!(":seed") view=SeedView />
+                </ParentRoute>
             </Routes>
         </Router>
     }

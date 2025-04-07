@@ -69,7 +69,6 @@ pub fn SeedView() -> impl IntoView {
                 </div>
             </div>
         </div>
-        <Navbar />
 
     }
 }

@@ -85,6 +85,5 @@ pub fn SeedForm() -> impl IntoView {
             </div>
         </div>
         </Form>
-        <Navbar/>
     }
 }
