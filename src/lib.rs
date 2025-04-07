@@ -1,6 +1,5 @@
 use std::sync::LazyLock;
 
-use components::mission::MissionListView;
 use leptos::prelude::*;
 use leptos_router::{
     components::{Route, Router, Routes},
@@ -9,7 +8,11 @@ use leptos_router::{
 
 mod components;
 mod pages;
-use pages::{seed_form::SeedForm, seed_view::SeedView};
+use pages::{
+    mission_pages::{MissionListPage, MissionPage},
+    seed_form::SeedForm,
+    seed_view::SeedView,
+};
 use serde::Deserialize;
 
 #[component]
@@ -18,7 +21,8 @@ pub fn App() -> impl IntoView {
         <Router base="/beerio".to_string() >
             <Routes fallback=|| "error">
                 <Route path=path!("/") view=SeedForm/>
-                <Route path=path!("missions") view=MissionListView />
+                <Route path=path!("missions") view=MissionListPage />
+                <Route path=path!("missions/:mission") view=MissionPage />
                 <Route path=path!(":seed") view=SeedView />
             </Routes>
         </Router>

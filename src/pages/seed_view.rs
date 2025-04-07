@@ -43,13 +43,12 @@ pub fn SeedView() -> impl IntoView {
     let hash = move || generate_seed_hash(seed().clone(), round());
 
     let rules = move || generate_numbers_from_hash(hash(), 12, 0, MISSIONS.len() - 1);
-    let rule = move || {
-        *rules()
+    let mission = Signal::derive(move || {
+        let mission_id = *rules()
             .get(player() - 1)
-            .expect("rules vector should be generated now")
-    };
-
-    let mission = Signal::derive(move || MISSIONS.get(rule()).unwrap().clone());
+            .expect("rules vector should be generated now");
+        MISSIONS.get(mission_id).unwrap().clone()
+    });
 
     view! {
         <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">

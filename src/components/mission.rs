@@ -1,8 +1,6 @@
 use crate::Mission;
 use leptos::prelude::*;
 
-use crate::{MISSIONS, components::layout::Navbar};
-
 #[component]
 pub fn MissionView(#[prop(into)] mission: Signal<Mission>) -> impl IntoView {
     view! {
@@ -14,22 +12,5 @@ pub fn MissionView(#[prop(into)] mission: Signal<Mission>) -> impl IntoView {
             {move || mission.get().description}
             </div>
         </div>
-    }
-}
-
-#[component]
-pub fn MissionListView() -> impl IntoView {
-    let rules_view = (0..MISSIONS.len())
-        .map(|i| {
-            view! {<MissionView mission=Signal::derive(move || MISSIONS.get(i).unwrap().clone())/>}
-        })
-        .collect_view();
-
-    view! {
-        <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">
-            {rules_view}
-        </div>
-        <Navbar />
-
     }
 }
