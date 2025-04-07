@@ -10,12 +10,12 @@ use rand_chacha::ChaCha20Rng;
 use sha2::{Digest, Sha256};
 
 use crate::{
-    RULES,
-    components::{css::Button, layout::Navbar, rule_display::RuleDisplay},
+    MISSIONS,
+    components::{css::Button, layout::Navbar, mission::MissionView},
 };
 
 #[component]
-pub fn SeedDisplay() -> impl IntoView {
+pub fn SeedView() -> impl IntoView {
     //collect url /:seed
     let params = use_params_map();
     let seed = move || params.read().get("seed").unwrap_or_default();
@@ -42,17 +42,19 @@ pub fn SeedDisplay() -> impl IntoView {
 
     let hash = move || generate_seed_hash(seed().clone(), round());
 
-    let rules = move || generate_numbers_from_hash(hash(), 12, 0, RULES.get().unwrap().len() - 1);
-    let rule = Signal::derive(move || {
+    let rules = move || generate_numbers_from_hash(hash(), 12, 0, MISSIONS.len() - 1);
+    let rule = move || {
         *rules()
             .get(player() - 1)
             .expect("rules vector should be generated now")
-    });
+    };
+
+    let mission = Signal::derive(move || MISSIONS.get(rule()).unwrap().clone());
 
     view! {
         <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">
             <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">{move || format!("Round {}", round())}</h1>
-            <RuleDisplay rule/>
+            <MissionView mission/>
             <div class="absolute bottom-20 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
                 <Show when=move || 1 < round() >
                     <div class="w-1/2">

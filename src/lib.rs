@@ -1,5 +1,6 @@
-use std::sync::OnceLock;
+use std::sync::LazyLock;
 
+use components::mission::MissionListView;
 use leptos::prelude::*;
 use leptos_router::{
     components::{Route, Router, Routes},
@@ -8,43 +9,39 @@ use leptos_router::{
 
 mod components;
 mod pages;
-use pages::{rules_display::RulesDisplay, seed_display::SeedDisplay, seed_form::SeedForm};
+use pages::{seed_form::SeedForm, seed_view::SeedView};
 use serde::Deserialize;
 
 #[component]
 pub fn App() -> impl IntoView {
-    let result = RULES.set(
-        toml::from_str::<Rules>(include_str!(concat!(
-            env!("CARGO_MANIFEST_DIR"),
-            "/rules.toml"
-        )))
-        .unwrap()
-        .rules,
-    );
-
-    result.unwrap();
-
     view! {
         <Router base="/beerio".to_string() >
             <Routes fallback=|| "error">
                 <Route path=path!("/") view=SeedForm/>
-                <Route path=path!("rules") view=RulesDisplay />
-                <Route path=path!(":seed") view=SeedDisplay/>
+                <Route path=path!("missions") view=MissionListView />
+                <Route path=path!(":seed") view=SeedView />
             </Routes>
         </Router>
     }
 }
 
 #[derive(Debug, Deserialize, Clone)]
-pub struct Rule {
+pub struct Mission {
     name: String,
     description: String,
 }
 
 #[derive(Debug, Deserialize)]
-struct Rules {
+struct Missions {
     #[serde(rename = "rules")]
-    rules: Vec<Rule>,
+    missions: Vec<Mission>,
 }
 
-pub static RULES: OnceLock<Vec<Rule>> = std::sync::OnceLock::new();
+pub static MISSIONS: LazyLock<Vec<Mission>> = std::sync::LazyLock::new(|| {
+    toml::from_str::<Missions>(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/rules.toml"
+    )))
+    .unwrap()
+    .missions
+});
