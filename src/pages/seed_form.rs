@@ -1,7 +1,5 @@
 use leptos::prelude::*;
-use leptos_router::{components::Form, hooks::use_query_map};
-
-use crate::components::layout::Navbar;
+use leptos_router::hooks::use_query_map;
 
 #[component]
 pub fn SeedForm() -> impl IntoView {
@@ -17,9 +15,7 @@ pub fn SeedForm() -> impl IntoView {
     let seed = RwSignal::new(query.read().get("seed").unwrap_or("seed".to_string()));
 
     view! {
-        <Form method="GET" action= move || format!("/{}", seed.get())>
-            <div class="min-h-screen bg-gray-100 flex flex-col items-center pb-16">
-            {/* Centered container for seed input */}
+        <form method="GET" action= move || format!("/beerio/{}", seed.get()) class="flex flex-col flex-grow w-full items-center">
 
             <div class="w-full max-w-md p-6">
                 <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
@@ -38,7 +34,7 @@ pub fn SeedForm() -> impl IntoView {
             </div>
 
             {/* Player selection grid (unchanged) */}
-            <div class="flex-grow w-full p-4 grid grid-cols-3 gap-3 auto-rows-fr max-w-4xl">
+            <div class="flex-grow max-w-4xl w-full p-4 grid grid-cols-3 gap-3 auto-rows-fr">
                 {(1..=12).map(|player_num| {
                     let is_selected = move || player.get() == player_num;
                     view! {
@@ -83,7 +79,6 @@ pub fn SeedForm() -> impl IntoView {
                     Generate Seed
                 </button>
             </div>
-        </div>
-        </Form>
+        </form>
     }
 }
