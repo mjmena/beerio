@@ -1,5 +1,8 @@
 use leptos::prelude::*;
-use leptos_router::{components::A, hooks::use_params_map};
+use leptos_router::{
+    components::{A, Outlet},
+    hooks::use_params_map,
+};
 
 use crate::{
     MISSIONS,
@@ -16,29 +19,30 @@ pub fn MissionPage() -> impl IntoView {
             .get("mission")
             .unwrap_or_default()
             .parse::<usize>()
-            .unwrap_or_default()
+            .unwrap_or(1)
     };
     let mission = Signal::derive(move || MISSIONS.get(mission_id() - 1).unwrap().clone());
 
     view! {
-
-            <MissionView mission/>
-            <div class="absolute bottom-20 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
-                <Show when=move || {mission_id() > 1} >
-                    <div class="w-1/2">
-                    <A href=move || format!("/beerio/missions/{}", mission_id() - 1) >
-                        <Button>PREVIOUS MISSION</Button>
-                    </A>
-                    </div>
-                </Show>
-                <Show when=move || {mission_id() < MISSIONS.len()} >
+    <div class="flex flex-col h-full relative">
+        <MissionView mission/>
+        <div class="absolute bottom-0 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
+            <Show when=move || {mission_id() > 1} >
                 <div class="w-1/2">
-                    <A href=move || format!("/beerio/missions/{}", mission_id() + 1) >
-                    <Button>NEXT MISSION </Button>
+                <A href=move || format!("/beerio/missions/{}", mission_id() - 1) >
+                    <Button>PREVIOUS MISSION</Button>
                 </A>
                 </div>
-                </Show>
+            </Show>
+            <Show when=move || {mission_id() < MISSIONS.len()} >
+            <div class="w-1/2">
+                <A href=move || format!("/beerio/missions/{}", mission_id() + 1) >
+                <Button>NEXT MISSION </Button>
+            </A>
             </div>
+            </Show>
+        </div>
+    </div>
     }
 }
 
@@ -47,7 +51,7 @@ pub fn MissionListPage() -> impl IntoView {
     let missions_list_view = (0..MISSIONS.len())
         .map(|i| {
             let mission = MISSIONS.get(i).unwrap().clone();
-            view! {<a href=format!("/beerio/missions/{}",i)>
+            view! {<a href=format!("/beerio/missions/{}",i+1)>
                 <div class="text-2xl">{mission.name}</div>
             </a>}
         })
@@ -55,6 +59,11 @@ pub fn MissionListPage() -> impl IntoView {
 
     view! {
         <h1 class="text-6xl font-bold text-gray-800 text-center mb-4">Missions</h1>
-        {missions_list_view}
+        <div class="flex">
+            <div>
+                {missions_list_view}
+            </div>
+            <Outlet />
+        </div>
     }
 }
