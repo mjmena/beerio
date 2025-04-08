@@ -15,8 +15,7 @@ pub fn SeedForm() -> impl IntoView {
     let seed = RwSignal::new(query.read().get("seed").unwrap_or("seed".to_string()));
 
     view! {
-        <div class="flex flex-col flex-grow w-full items-center">
-        <Form method="GET" action= move || format!("/{}", seed.get())>
+        <Form method="GET" action= move || format!("/{}", seed.get()) attr:class="flex flex-col flex-grow w-full items-center" >
 
             <div class="w-full max-w-md p-6">
                 <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
@@ -81,6 +80,5 @@ pub fn SeedForm() -> impl IntoView {
                 </button>
             </div>
         </Form>
-            </div>
     }
 }
