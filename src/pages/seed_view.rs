@@ -11,7 +11,7 @@ use sha2::{Digest, Sha256};
 
 use crate::{
     MISSIONS,
-    components::{css::Button, layout::Navbar, mission::MissionView},
+    components::{css::Button, mission::MissionView},
 };
 
 #[component]

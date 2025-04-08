@@ -21,7 +21,7 @@ pub fn App() -> impl IntoView {
     view! {
         <Router base="/beerio".to_string()>
             <Routes fallback=|| "error">
-                <ParentRoute path=path!("/") view=Layout>
+                <ParentRoute path=path!("") view=Layout>
                     <Route path=path!("") view=SeedForm/>
                     <ParentRoute path=path!("missions") view=MissionListPage >
                         <Route path=path!("") view=MissionPage />

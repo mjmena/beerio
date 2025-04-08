@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_router::hooks::use_query_map;
+use leptos_router::{components::Form, hooks::use_query_map};
 
 #[component]
 pub fn SeedForm() -> impl IntoView {
@@ -15,7 +15,8 @@ pub fn SeedForm() -> impl IntoView {
     let seed = RwSignal::new(query.read().get("seed").unwrap_or("seed".to_string()));
 
     view! {
-        <form method="GET" action= move || format!("/beerio/{}", seed.get()) class="flex flex-col flex-grow w-full items-center">
+        <div class="flex flex-col flex-grow w-full items-center">
+        <Form method="GET" action= move || format!("/{}", seed.get())>
 
             <div class="w-full max-w-md p-6">
                 <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
@@ -79,6 +80,7 @@ pub fn SeedForm() -> impl IntoView {
                     Generate Seed
                 </button>
             </div>
-        </form>
+        </Form>
+            </div>
     }
 }
