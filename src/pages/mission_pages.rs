@@ -6,7 +6,7 @@ use leptos_router::{
 
 use crate::{
     MISSIONS,
-    components::{css::Button, mission::MissionView},
+    components::{css::Button, item_display::ItemDisplay, mission::MissionView},
 };
 
 #[component]
@@ -26,6 +26,7 @@ pub fn MissionPage() -> impl IntoView {
     view! {
     <div class="flex flex-col h-full relative">
         <MissionView mission/>
+        <ItemDisplay item_id=Signal::derive(mission_id) />
         <div class="absolute bottom-0 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
             <Show when=move || {mission_id() > 1} >
                 <div class="w-1/2">
