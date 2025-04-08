@@ -6,7 +6,7 @@ use leptos_router::{
 
 use crate::{
     MISSIONS,
-    components::{css::Button, item_display::ItemDisplay, mission::MissionView},
+    components::{css::Button, mission::MissionView},
 };
 
 #[component]
@@ -26,19 +26,18 @@ pub fn MissionPage() -> impl IntoView {
     view! {
     <div class="flex flex-col h-full relative">
         <MissionView mission/>
-        <ItemDisplay item_id=Signal::derive(mission_id) />
-        <div class="absolute bottom-0 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
+        <div class="absolute bottom-0 flex w-full max-w-md gap-x-4 justify-center">
             <Show when=move || {mission_id() > 1} >
-                <div class="w-1/2">
+                <div class="w-1/2 flex-grow">
                 <A href=move || format!("/beerio/missions/{}", mission_id() - 1) >
-                    <Button>PREVIOUS MISSION</Button>
+                    <Button><div>PREVIOUS</div><div>MISSION</div></Button>
                 </A>
                 </div>
             </Show>
             <Show when=move || {mission_id() < MISSIONS.len()} >
-            <div class="w-1/2">
+            <div class="w-1/2 flex-grow">
                 <A href=move || format!("/beerio/missions/{}", mission_id() + 1) >
-                <Button>NEXT MISSION </Button>
+                <Button><div>NEXT</div><div>MISSION</div></Button>
             </A>
             </div>
             </Show>
@@ -60,7 +59,7 @@ pub fn MissionListPage() -> impl IntoView {
 
     view! {
         <h1 class="text-6xl font-bold text-gray-800 text-center mb-4">Missions</h1>
-        <div class="flex">
+        <div class="flex flex-grow p-6">
             <div>
                 {missions_list_view}
             </div>
