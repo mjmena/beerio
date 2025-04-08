@@ -1,2 +1,2 @@
 default:
-    watchexec -r trunk serve
+    watchexec -r trunk serve --public-url /beerio

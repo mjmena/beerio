@@ -4,7 +4,7 @@ use leptos::prelude::*;
 pub fn ItemDisplay(#[prop(into)] item_id: Signal<usize>) -> impl IntoView {
     view! {
         <div class="flex flex-col w-full h-1/2 max-w-md text-center text-4xl p-4">
-            <img src=move || format!("/assets/items/{}.png", ITEMS[item_id.get()] ) />
+            <img src=move || format!("/beerio/assets/items/{}.png", ITEMS[item_id.get()] ) />
         </div>
     }
 }
