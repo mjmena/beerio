@@ -1,8 +1,8 @@
 use leptos::prelude::*;
-use rand::{Rng, SeedableRng, seq::SliceRandom};
+use rand::{seq::SliceRandom, Rng, SeedableRng};
 use rand_chacha::ChaCha20Rng;
 
-use crate::{MISSIONS, components::mission::MissionView};
+use crate::{components::mission::MissionView, MISSIONS};
 
 #[component]
 pub fn RandomItemDisplay(seed: Signal<[u8; 32]>) -> impl IntoView {
@@ -10,7 +10,7 @@ pub fn RandomItemDisplay(seed: Signal<[u8; 32]>) -> impl IntoView {
     let item_id = move || rng().random_range(0..ITEMS.len());
     view! {
         <div class="max-w-md text-center text-4xl p-4">
-            <img src=move || format!("/beerio/assets/items/{}.png", ITEMS.get(item_id()).unwrap() ) />
+            <img src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap() ) />
         </div>
     }
 }

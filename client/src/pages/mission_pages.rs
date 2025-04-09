@@ -1,12 +1,12 @@
 use leptos::prelude::*;
 use leptos_router::{
-    components::{A, Outlet},
+    components::{Outlet, A},
     hooks::use_params_map,
 };
 
 use crate::{
-    MISSIONS,
     components::{css::Button, mission::MissionView},
+    MISSIONS,
 };
 
 #[component]
@@ -29,14 +29,14 @@ pub fn MissionPage() -> impl IntoView {
         <div class="absolute bottom-0 flex w-full max-w-md gap-x-4 justify-center">
             <Show when=move || {mission_id() > 1} >
                 <div class="w-1/2 flex-grow">
-                <A href=move || format!("/beerio/missions/{}", mission_id() - 1) >
+                <A href=move || format!("/missions/{}", mission_id() - 1) >
                     <Button><div>PREVIOUS</div><div>MISSION</div></Button>
                 </A>
                 </div>
             </Show>
             <Show when=move || {mission_id() < MISSIONS.len()} >
             <div class="w-1/2 flex-grow">
-                <A href=move || format!("/beerio/missions/{}", mission_id() + 1) >
+                <A href=move || format!("/missions/{}", mission_id() + 1) >
                 <Button><div>NEXT</div><div>MISSION</div></Button>
             </A>
             </div>
@@ -51,7 +51,7 @@ pub fn MissionListPage() -> impl IntoView {
     let missions_list_view = (0..MISSIONS.len())
         .map(|i| {
             let mission = MISSIONS.get(i).unwrap().clone();
-            view! {<a href=format!("/beerio/missions/{}",i+1)>
+            view! {<a href=format!("/missions/{}",i+1)>
                 <div class="text-2xl">{mission.name}</div>
             </a>}
         })
