@@ -69,11 +69,18 @@ pub fn App() -> impl IntoView {
 pub struct Mission {
     name: String,
     description: String,
+    #[serde(default)] // Makes this optional
+    needs_random_item: bool,
+    // #[serde(default)] // Makes this optional
+    // needs_random_kart: bool,
+    // #[serde(default)] // Makes this optional
+    // needs_random_wheel: bool,
+    // #[serde(default)] // Makes this optional
+    // needs_random_glider: bool,
 }
 
 #[derive(Debug, Deserialize)]
 struct Missions {
-    #[serde(rename = "rules")]
     missions: Vec<Mission>,
 }
 
