@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use leptos_meta::{provide_meta_context, MetaTags, Stylesheet};
+use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{ParentRoute, Route, Router, Routes},
     path,
@@ -12,6 +12,7 @@ mod components;
 mod pages;
 use pages::{
     mission_pages::{MissionListPage, MissionPage},
+    random_page::RandomPage,
     seed_form::SeedForm,
     seed_view::SeedView,
 };
@@ -33,6 +34,7 @@ pub fn shell(options: LeptosOptions) -> impl IntoView {
         <!DOCTYPE html>
         <html lang="en">
             <head>
+                <Title text="Beerio Kart" />
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <AutoReload options=options.clone()/>
@@ -53,6 +55,7 @@ pub fn App() -> impl IntoView {
         <Router >
             <Routes fallback=|| "error">
                 <ParentRoute path=path!("") view=Layout>
+                    <Route path=path!("") view=RandomPage />
                     <Route path=path!("/seed") view=SeedForm/>
                     <Route path=path!("missions") view=MissionListPage />
                     <Route path=path!("missions/:mission") view=MissionPage />

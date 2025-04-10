@@ -16,6 +16,21 @@ pub fn RandomItemDisplay(get_seed: impl Fn() -> [u8; 32] + Send + Sync + 'static
 }
 
 #[component]
+pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
+    let rng = move || ChaCha20Rng::from_seed(get_seed());
+    let get_kart_id = move || rng().random_range(0..KARTS.len());
+    let get_wheel_id = move || rng().random_range(0..WHEELS.len());
+    let get_glider_id = move || rng().random_range(0..GLIDERS.len());
+    view! {
+        <div class="p-4">
+            <div>{move || KARTS.get(get_kart_id()).unwrap().to_string() }</div>
+            <div>{move || WHEELS.get(get_wheel_id()).unwrap().to_string()}</div>
+            <div>{move || GLIDERS.get(get_glider_id()).unwrap().to_string()}</div>
+        </div>
+    }
+}
+
+#[component]
 pub fn RandomMissionDisplay(
     get_seed: Signal<[u8; 32]>,
     get_player: impl Fn() -> usize + Send + Sync + 'static,
@@ -68,4 +83,134 @@ pub static ITEMS: [&str; 22] = [
     "triple_green_shells",
     "triple_mushrooms",
     "triple_red_shells",
+];
+pub static KARTS: [&str; 37] = [
+    "Standard Kart",
+    "Pipe Frame",
+    "B Dasher",
+    "Mach 8",
+    "Steel Driver",
+    "Cat Cruiser",
+    "Circuit Special",
+    "Tri-Speeder",
+    "Badwagon",
+    "Prancer",
+    "Biddybuggy",
+    "Landship",
+    "Sneeker",
+    "Sports Coupe",
+    "Gold Standard",
+    "GLA",
+    "W 25 Silver Arrow",
+    "300 SL Roadster",
+    "Blue Falcon",
+    "Tanooki Kart",
+    "Bone Rattler",
+    "Inkstriker",
+    "Master Cycle",
+    "Streetle",
+    "P-Wing",
+    "Koopa Clown",
+    "Standard Bike",
+    "Comet",
+    "Sport Bike",
+    "The Duke",
+    "Flame Rider",
+    "Varmint",
+    "Mr. Scooty",
+    "Jet Bike",
+    "Yoshi Bike",
+    "Master Cycle Zero",
+    "City Tripper",
+];
+pub static WHEELS: [&str; 22] = [
+    "Standard",
+    "Monster",
+    "Roller",
+    "Slim",
+    "Slick",
+    "Metal",
+    "Button",
+    "Off-Road",
+    "Sponge",
+    "Wood",
+    "Cushion",
+    "Blue Standard",
+    "Hot Monster",
+    "Azure Roller",
+    "Crimson Slim",
+    "Cyber Slick",
+    "Retro Off-Road",
+    "Gold Tires",
+    "GLA Tires",
+    "Triforce Tires",
+    "Leaf Tires",
+    "Ancient Tires",
+];
+pub static GLIDERS: [&str; 15] = [
+    "Super Glider",
+    "Cloud Glider",
+    "Wario Wing",
+    "Waddle Wing",
+    "Peach Parasol",
+    "Parachute",
+    "Parafoil",
+    "Flower Glider",
+    "Bowser Kite",
+    "Plane Glider",
+    "MKTV Parafoil",
+    "Gold Glider",
+    "Hylian Kite",
+    "Paper Glider",
+    "Paraglider",
+];
+
+pub static CHARACTERS: [&str; 47] = [
+    "Baby Daisy",
+    "Baby Luigi",
+    "Baby Mario",
+    "Baby Peach",
+    "Baby Rosalina",
+    "Birdo",
+    "Cat Peach",
+    "Dry Bones",
+    "Lemmy",
+    "Bowser Jr.",
+    "Daisy",
+    "Diddy Kong",
+    "Iggy",
+    "Inkling Boy",
+    "Inkling Girl",
+    "Isabelle",
+    "Kamek",
+    "Koopa Troopa",
+    "Lakitu",
+    "Larry",
+    "Link",
+    "Luigi",
+    "Ludwig",
+    "Mario",
+    "Morton",
+    "Pauline",
+    "Peach",
+    "Peachette",
+    "Rosalina",
+    "Roy",
+    "Shy Guy",
+    "Toad",
+    "Toadette",
+    "Villager",
+    "Wendy",
+    "Wiggler",
+    "Yoshi",
+    "Bowser",
+    "Donkey Kong",
+    "Dry Bowser",
+    "Funky Kong",
+    "King Boo",
+    "Metal Mario",
+    "Petey Piranha",
+    "Pink Gold Peach",
+    "Wario",
+    "Waluigi",
 ];
