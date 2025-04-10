@@ -26,6 +26,7 @@
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               toolchain
+              binaryen
               llvmPackages.bintools
               cargo-leptos
               cargo-generate
@@ -35,6 +36,11 @@
 
             CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "lld";
 
+            LEPTOS_OUTPUT_NAME = "beerio";
+            LEPTOS_SITE_ROOT = "site";
+            LEPTOS_SITE_PKG_DIR = "pkg";
+            LEPTOS_SITE_ADDR = "0.0.0.0:3000";
+            LEPTOS_RELOAD_PORT = "3001";
           };
         }
       );
