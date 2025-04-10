@@ -29,7 +29,7 @@
               llvmPackages.bintools
               cargo-leptos
               cargo-generate
-              tailwindcss
+              tailwindcss_4
             ];
             packages = [ pkgs.just pkgs.bacon pkgs.watchexec ];
 
