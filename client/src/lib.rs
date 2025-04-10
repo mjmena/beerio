@@ -53,12 +53,10 @@ pub fn App() -> impl IntoView {
         <Router >
             <Routes fallback=|| "error">
                 <ParentRoute path=path!("") view=Layout>
-                    <Route path=path!("") view=SeedForm/>
-                    <ParentRoute path=path!("missions") view=MissionListPage >
-                        <Route path=path!("") view=MissionPage />
-                        <Route path=path!(":mission") view=MissionPage />
-                    </ParentRoute>
-                    <Route path=path!(":seed") view=SeedView />
+                    <Route path=path!("/seed") view=SeedForm/>
+                    <Route path=path!("missions") view=MissionListPage />
+                    <Route path=path!("missions/:mission") view=MissionPage />
+                    <Route path=path!("seed/:seed/:player") view=SeedView />
                 </ParentRoute>
             </Routes>
         </Router>

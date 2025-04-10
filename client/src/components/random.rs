@@ -5,25 +5,31 @@ use rand_chacha::ChaCha20Rng;
 use crate::{components::mission::MissionView, MISSIONS};
 
 #[component]
-pub fn RandomItemDisplay(seed: Signal<[u8; 32]>) -> impl IntoView {
-    let rng = move || ChaCha20Rng::from_seed(seed.get());
+pub fn RandomItemDisplay(get_seed: impl Fn() -> [u8; 32] + Send + Sync + 'static) -> impl IntoView {
+    let rng = move || ChaCha20Rng::from_seed(get_seed());
     let item_id = move || rng().random_range(0..ITEMS.len());
     view! {
-        <div class="max-w-md text-center text-4xl p-4">
-            <img src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap() ) />
+        <div class="p-4">
+            <img class="size-40 object-contain" src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap() ) />
         </div>
     }
 }
 
 #[component]
-pub fn RandomMissionDisplay(seed: Signal<[u8; 32]>, player: Signal<usize>) -> impl IntoView {
-    let mission_ids = move || generate_numbers_from_hash(seed.get(), 12, 0, MISSIONS.len() - 1);
+pub fn RandomMissionDisplay(
+    get_seed: Signal<[u8; 32]>,
+    get_player: impl Fn() -> usize + Send + Sync + 'static,
+) -> impl IntoView {
+    let mission_ids = move || generate_numbers_from_hash(get_seed(), 12, 0, MISSIONS.len() - 1);
     let mission = Signal::derive(move || {
-        let mission_id = *mission_ids().get(player.get() - 1).unwrap();
+        let mission_id = *mission_ids().get(get_player() - 1).unwrap();
         MISSIONS.get(mission_id).unwrap().clone()
     });
     view! {
         <MissionView mission/>
+        <Show when=move || mission().needs_random_item >
+            <RandomItemDisplay get_seed />
+        </Show>
     }
 }
 
