@@ -5,7 +5,7 @@ use rand_chacha::ChaCha20Rng;
 use crate::{components::mission::MissionView, MISSIONS};
 
 #[component]
-pub fn RandomItemDisplay(get_seed: impl Fn() -> [u8; 32] + Send + Sync + 'static) -> impl IntoView {
+pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let item_id = move || rng().random_range(0..ITEMS.len());
     view! {
@@ -55,7 +55,7 @@ pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl In
 
     view! {
         <div>
-            {get_number()}
+            {move || get_number()+1}
         </div>
     }
 }
