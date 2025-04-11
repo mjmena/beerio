@@ -48,6 +48,18 @@ pub fn RandomMissionDisplay(
     }
 }
 
+#[component]
+pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl IntoView {
+    let rng = move || ChaCha20Rng::from_seed(get_seed());
+    let get_number = move || rng().random_range(0..number);
+
+    view! {
+        <div>
+            {get_number()}
+        </div>
+    }
+}
+
 fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
     // Create a stable seed from the input string
     // Use ChaCha20 RNG - guaranteed portable and stable
