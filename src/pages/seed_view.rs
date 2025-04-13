@@ -7,30 +7,25 @@ use leptos_router::{
 use hex;
 use sha2::{Digest, Sha256};
 
-use crate::components::{
-    css::Button,
-    random::{RandomItemDisplay, RandomMissionDisplay},
-};
+use crate::components::random::RandomMissionDisplay;
 
 #[component]
 pub fn SeedView() -> impl IntoView {
     //collect url /:seed
     let params = use_params_map();
-    let seed = move || params.read().get("seed").unwrap_or_default();
 
-    //collect query info ?player= &round=
-    let query = use_query_map();
-    let player = Signal::derive(move || {
-        query
+    let get_seed = move || params.read().get("seed").unwrap_or_default();
+    let get_player = Signal::derive(move || {
+        params
             .read()
             .get("player")
             .unwrap_or_default()
-            .parse::<usize>()
+            .parse()
             .unwrap_or(1)
     });
 
-    let round = move || {
-        query
+    let get_round = || {
+        use_query_map()
             .read()
             .get("round")
             .unwrap_or_default()
@@ -38,26 +33,19 @@ pub fn SeedView() -> impl IntoView {
             .unwrap_or(1)
     };
 
-    let seed = Signal::derive(move || generate_seed_hash(seed().clone(), round()));
+    let get_seed = Signal::derive(move || generate_seed_hash(get_seed(), get_round()));
+
+    let button_css = "text-center w-full h-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors";
 
     view! {
         <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">
-            <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">{move || format!("Round {}", round())}</h1>
-            <RandomMissionDisplay seed player/>
-            <RandomItemDisplay seed/>
+            <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">{move || format!("Round {}", get_round())}</h1>
+            <RandomMissionDisplay get_seed get_player/>
             <div class="absolute bottom-20 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
-                <Show when=move || 1 < round() >
-                    <div class="w-1/2">
-                    <A href=move || format!("?player={}&round={}", player.get(), round()-1) >
-                        <Button>PAST ROUND</Button>
-                    </A>
-                    </div>
-                </Show>
-                <div class="w-1/2">
-                <A href=move ||  format!("?player={}&round={}", player.get(), round()+1)>
-                    <Button>NEXT ROUND </Button>
-                </A>
-                </div>
+                <Show when=move || 1 < get_round() >
+                    <A href=move || format!("?round={}",get_round().checked_sub(1).unwrap_or(1)) attr:class={button_css}>Previous Round</A>
+                 </Show>
+                    <A href=move || format!("?round={}",get_round() +1) attr:class={button_css}> Next Round</A>
             </div>
         </div>
 

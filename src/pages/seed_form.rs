@@ -1,22 +1,13 @@
 use leptos::prelude::*;
-use leptos_router::{components::Form, hooks::use_query_map};
+use leptos_router::{components::Form, hooks::query_signal};
 
 #[component]
 pub fn SeedForm() -> impl IntoView {
-    let query = use_query_map();
-    let player = RwSignal::new(
-        query
-            .read()
-            .get("player")
-            .unwrap_or_default()
-            .parse()
-            .unwrap_or(1),
-    );
-    let seed = RwSignal::new(query.read().get("seed").unwrap_or("seed".to_string()));
+    let (get_seed, set_seed) = query_signal::<String>("seed");
+    let (get_player, set_player) = query_signal::<usize>("player");
 
     view! {
-        <Form method="GET" action= move || format!("/{}", seed.get()) attr:class="flex flex-col flex-grow w-full items-center" >
-
+        <Form method="GET" action=move || format!("{}/{}", get_seed().unwrap_or_default(), get_player().unwrap_or(1)) attr:class="flex flex-col flex-grow w-full items-center" >
             <div class="w-full max-w-md p-6">
                 <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Enter Your Seed</h1>
 
@@ -27,7 +18,11 @@ pub fn SeedForm() -> impl IntoView {
                         class="w-full px-4 py-2 text-center border border-gray-300 rounded-md shadow-sm
                                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="Enter game seed"
-                        bind:value=seed
+                        prop:value= move|| get_seed().unwrap_or_default()
+                        on:input=move|ev| {
+                            let value = event_target_value(&ev);
+                            set_seed(if value.is_empty(){None} else {Some(value)});
+                        }
                     />
                 </div>
                <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">Choose Your Player</h1>
@@ -36,17 +31,18 @@ pub fn SeedForm() -> impl IntoView {
             {/* Player selection grid (unchanged) */}
             <div class="flex-grow max-w-4xl w-full p-4 grid grid-cols-3 gap-3 auto-rows-fr">
                 {(1..=12).map(|player_num| {
-                    let is_selected = move || player.get() == player_num;
+                    let is_selected = move || get_player().unwrap_or_default() == player_num;
                     view! {
                         <div class="relative h-full">
                             <input
                                 type="radio"
                                 id=format!("player_{}", player_num)
-                                name="player"
                                 value=player_num
                                 class="absolute opacity-0 w-0 h-0"
-                                checked=is_selected
-                                on:change=move |_| player.set(player_num)
+                                on:input=move|ev| {
+                                    let value = event_target_value(&ev);
+                                    set_player(if value.is_empty(){None} else {Some(value.parse().unwrap_or(1))});
+                                }
                             />
                             <label
                                 for=format!("player_{}", player_num)
@@ -70,8 +66,7 @@ pub fn SeedForm() -> impl IntoView {
             <input type="hidden" value="1" name="round"/>
             {/* Normal-sized centered submit button */}
             <div class="w-full max-w-md p-6">
-                <button
-                    type= "submit"
+                <button type="submit"
                     class="w-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium
                    rounded-md shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 
                    focus:ring-green-500 transition-colors"

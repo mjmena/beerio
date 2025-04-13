@@ -8,8 +8,8 @@ console_error_panic_hook = "0.1.7"
 console_log = "1.0.0"
 getrandom = { version = "0.3.2", features = ["wasm_js"] }
 hex = "0.4.3"
-leptos = { version = "0.7.8", features = ["csr"] }
-leptos_router = "0.7.8"
+leptos = { version = "0.7.8", features = ["csr", "nightly"] }
+leptos_router = { version = "0.7.8", features = ["nightly"] }
 log = "0.4.27"
 rand = "0.9.0"
 rand_chacha = "0.9.0"

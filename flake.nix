@@ -25,8 +25,10 @@
         leptosPackages = with pkgs; [
           toolchain
           cargo-leptos
+          cargo-generate
           trunk # For building the frontend
           llvmPackages.bintools
+          tailwindcss_4
         ];
       in
       {
