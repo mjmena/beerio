@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    fenix.url = "github:nix-community/fenix";
+    fenix.url = "github:nix-community/fenix/monthly";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -16,14 +16,14 @@
         fenixPkgs = fenix.packages.${system};
 
         # Rust toolchain with components and WASM target
-        rustToolchain = fenixPkgs.combine [
-          fenixPkgs.stable.toolchain
-          fenixPkgs.targets.wasm32-unknown-unknown.stable.rust-std
+        toolchain = fenixPkgs.combine [
+          fenixPkgs.latest.toolchain
+          fenixPkgs.targets.wasm32-unknown-unknown.latest.rust-std
         ];
 
         # Packages needed for Leptos development
         leptosPackages = with pkgs; [
-          rustToolchain
+          toolchain
           cargo-leptos
           trunk # For building the frontend
           llvmPackages.bintools
