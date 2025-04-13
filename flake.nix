@@ -29,6 +29,7 @@
           trunk # For building the frontend
           llvmPackages.bintools
           tailwindcss_4
+          stylance-cli
         ];
       in
       {

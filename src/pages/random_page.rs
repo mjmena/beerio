@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 
 use leptos_router::hooks::query_signal;
-use rand::{distr::Alphanumeric, rng, Rng};
+use rand::{Rng, distr::Alphanumeric, rng};
 use sha2::{Digest, Sha256};
 
 use crate::components::random::{RandomItemDisplay, RandomLoadoutDisplay, RandomMissionDisplay};

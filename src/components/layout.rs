@@ -1,5 +1,7 @@
 use leptos::prelude::*;
-use leptos_router::components::{Outlet, A};
+use leptos_router::components::{A, Outlet};
+
+stylance::import_style!(style, "layout.module.css");
 
 #[component]
 pub fn Layout() -> impl IntoView {
@@ -43,7 +45,7 @@ pub fn Navbar() -> impl IntoView {
 #[component]
 pub fn NavbarLink(href: String, children: Children) -> impl IntoView {
     view! {
-        <A href=href.clone() attr:class="bg-blue-600 hover:bg-blue-700 text-white flex flex-grow flex-col items-center justify-center p-2">
+        <A href=href.clone() attr:class=style::navlink>
             {children()}
         </A>
     }
