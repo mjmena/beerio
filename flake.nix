@@ -30,6 +30,7 @@
           llvmPackages.bintools
           tailwindcss_4
           stylance-cli
+          leptosfmt
         ];
       in
       {
