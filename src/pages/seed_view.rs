@@ -38,17 +38,25 @@ pub fn SeedView() -> impl IntoView {
     let button_css = "text-center w-full h-full px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md shadow-sm text-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors";
 
     view! {
-        <div class="min-h-screen h-screen bg-gray-100 flex flex-col items-center">
-            <h1 class="text-2xl font-bold text-gray-800 text-center mb-4">{move || format!("Round {}", get_round())}</h1>
-            <RandomMissionDisplay get_seed get_player/>
-            <div class="absolute bottom-20 flex flex-row w-full max-w-md gap-x-4 items-end justify-center">
-                <Show when=move || 1 < get_round() >
-                    <A href=move || format!("?round={}",get_round().checked_sub(1).unwrap_or(1)) attr:class={button_css}>Previous Round</A>
-                 </Show>
-                    <A href=move || format!("?round={}",get_round() +1) attr:class={button_css}> Next Round</A>
-            </div>
+      <div class="flex flex-col items-center h-screen min-h-screen bg-gray-100">
+        <h1 class="mb-4 text-2xl font-bold text-center text-gray-800">
+          {move || format!("Round {}", get_round())}
+        </h1>
+        <RandomMissionDisplay get_seed get_player />
+        <div class="flex absolute bottom-20 flex-row gap-x-4 justify-center items-end w-full max-w-md">
+          <Show when=move || 1 < get_round()>
+            <A
+              href=move || format!("?round={}", get_round().checked_sub(1).unwrap_or(1))
+              attr:class=button_css
+            >
+              Previous Round
+            </A>
+          </Show>
+          <A href=move || format!("?round={}", get_round() + 1) attr:class=button_css>
+            Next Round
+          </A>
         </div>
-
+      </div>
     }
 }
 

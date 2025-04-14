@@ -20,17 +20,17 @@ use serde::Deserialize;
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-        <Router base="/beerio" >
-            <Routes fallback=|| RandomPage>
-                <ParentRoute path=path!("") view=Layout>
-                    <Route path=path!("") view=RandomPage />
-                    <Route path=path!("/seed") view=SeedForm/>
-                    <Route path=path!("missions") view=MissionListPage />
-                    <Route path=path!("missions/:mission") view=MissionPage />
-                    <Route path=path!("seed/:seed/:player") view=SeedView />
-                </ParentRoute>
-            </Routes>
-        </Router>
+      <Router base="/beerio">
+        <Routes fallback=|| RandomPage>
+          <ParentRoute path=path!("") view=Layout>
+            <Route path=path!("") view=RandomPage />
+            <Route path=path!("/seed") view=SeedForm />
+            <Route path=path!("missions") view=MissionListPage />
+            <Route path=path!("missions/:mission") view=MissionPage />
+            <Route path=path!("seed/:seed/:player") view=SeedView />
+          </ParentRoute>
+        </Routes>
+      </Router>
     }
 }
 
@@ -39,7 +39,7 @@ pub struct Mission {
     name: String,
     description: String,
     #[serde(default)] // Makes this optional
-    needs_random_item: bool,
+needs_random_item: bool,
     // #[serde(default)] // Makes this optional
     // needs_random_kart: bool,
     // #[serde(default)] // Makes this optional
