@@ -26,21 +26,19 @@
           toolchain
           cargo-leptos
           cargo-generate
-          trunk # For building the frontend
-          llvmPackages.bintools
+          trunk
           tailwindcss_4
           stylance-cli
           leptosfmt
         ];
       in
       {
-        devShells.default = pkgs.mkShell
+        devShells.default = pkgs.mkShell.override
+          {
+            stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv;
+          }
           {
             buildInputs = leptosPackages;
-            packages = [ pkgs.just pkgs.bacon pkgs.watchexec ];
-
-            CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "lld";
-
           };
       }
     );
