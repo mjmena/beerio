@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_router::hooks::use_url;
 use rand::{Rng, SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 
@@ -6,13 +7,16 @@ use crate::{MISSIONS, components::mission::MissionView};
 
 #[component]
 pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
+    let url = use_url();
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let item_id = move || rng().random_range(0..ITEMS.len());
     view! {
       <div class="p-4">
         <img
           class="object-contain size-40"
-          src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap())
+          src=move || {
+            format!("{}/assets/items/{}.png", url().path(), ITEMS.get(item_id()).unwrap())
+          }
         />
       </div>
     }
