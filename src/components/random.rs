@@ -1,17 +1,20 @@
 use leptos::prelude::*;
-use rand::{seq::SliceRandom, Rng, SeedableRng};
+use rand::{Rng, SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 
-use crate::{components::mission::MissionView, MISSIONS};
+use crate::{MISSIONS, components::mission::MissionView};
 
 #[component]
 pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let item_id = move || rng().random_range(0..ITEMS.len());
     view! {
-        <div class="p-4">
-            <img class="size-40 object-contain" src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap() ) />
-        </div>
+      <div class="p-4">
+        <img
+          class="object-contain size-40"
+          src=move || format!("/assets/items/{}.png", ITEMS.get(item_id()).unwrap())
+        />
+      </div>
     }
 }
 
@@ -22,11 +25,11 @@ pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let get_wheel_id = move || rng().random_range(0..WHEELS.len());
     let get_glider_id = move || rng().random_range(0..GLIDERS.len());
     view! {
-        <div class="p-4">
-            <div>{move || KARTS.get(get_kart_id()).unwrap().to_string() }</div>
-            <div>{move || WHEELS.get(get_wheel_id()).unwrap().to_string()}</div>
-            <div>{move || GLIDERS.get(get_glider_id()).unwrap().to_string()}</div>
-        </div>
+      <div class="p-4">
+        <div>{move || KARTS.get(get_kart_id()).unwrap().to_string()}</div>
+        <div>{move || WHEELS.get(get_wheel_id()).unwrap().to_string()}</div>
+        <div>{move || GLIDERS.get(get_glider_id()).unwrap().to_string()}</div>
+      </div>
     }
 }
 
@@ -41,10 +44,10 @@ pub fn RandomMissionDisplay(
         MISSIONS.get(mission_id).unwrap().clone()
     });
     view! {
-        <MissionView mission/>
-        <Show when=move || mission().needs_random_item >
-            <RandomItemDisplay get_seed />
-        </Show>
+      <MissionView mission />
+      <Show when=move || mission().needs_random_item>
+        <RandomItemDisplay get_seed />
+      </Show>
     }
 }
 
@@ -53,11 +56,7 @@ pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl In
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let get_number = move || rng().random_range(0..number);
 
-    view! {
-        <div>
-            {move || get_number()+1}
-        </div>
-    }
+    view! { <div>{move || get_number() + 1}</div> }
 }
 
 fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {

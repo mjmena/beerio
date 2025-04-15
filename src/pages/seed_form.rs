@@ -12,10 +12,10 @@ pub fn SeedForm() -> impl IntoView {
         action=move || {
           format!("{}/{}", get_seed().unwrap_or_default(), get_player().unwrap_or(1))
         }
-        attr:class="flex flex-col flex-grow w-full items-center"
+        attr:class="flex flex-col flex-grow items-center w-full"
       >
         <div class="p-6 w-full max-w-md">
-      <h1 class="mb-4 text-2xl font-bold text-center text-gray-800">Enter Your Seed</h1>
+          <h1 class="mb-4 text-2xl font-bold text-center text-gray-800">Enter Your Seed</h1>
 
           {}
           <div class="mb-6">

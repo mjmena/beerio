@@ -2,8 +2,8 @@ use leptos::prelude::*;
 use leptos_router::{components::A, hooks::use_params_map};
 
 use crate::{
-    components::{css::Button, mission::MissionView},
     MISSIONS,
+    components::{css::Button, mission::MissionView},
 };
 
 #[component]
@@ -21,25 +21,31 @@ pub fn MissionPage() -> impl IntoView {
     let mission = Signal::derive(move || MISSIONS.get(mission_id() - 1).unwrap().clone());
 
     view! {
-    <div class="flex flex-col h-full relative">
-        <MissionView mission/>
-        <div class="absolute bottom-0 flex w-full max-w-md gap-x-4 justify-center">
-            <Show when=move || {mission_id() > 1} >
-                <div class="w-1/2 flex-grow">
-                <A href=move || format!("/missions/{}", mission_id() - 1) >
-                    <Button><div>PREVIOUS</div><div>MISSION</div></Button>
-                </A>
-                </div>
-            </Show>
-            <Show when=move || {mission_id() < MISSIONS.len()} >
-            <div class="w-1/2 flex-grow">
-                <A href=move || format!("/missions/{}", mission_id() + 1) >
-                <Button><div>NEXT</div><div>MISSION</div></Button>
-            </A>
+      <div class="flex relative flex-col h-full">
+        <MissionView mission />
+        <div class="flex absolute bottom-0 gap-x-4 justify-center w-full max-w-md">
+          <Show when=move || { mission_id() > 1 }>
+            <div class="flex-grow w-1/2">
+              <A href=move || format!("/missions/{}", mission_id() - 1)>
+                <Button>
+                  <div>PREVIOUS</div>
+                  <div>MISSION</div>
+                </Button>
+              </A>
             </div>
-            </Show>
+          </Show>
+          <Show when=move || { mission_id() < MISSIONS.len() }>
+            <div class="flex-grow w-1/2">
+              <A href=move || format!("/missions/{}", mission_id() + 1)>
+                <Button>
+                  <div>NEXT</div>
+                  <div>MISSION</div>
+                </Button>
+              </A>
+            </div>
+          </Show>
         </div>
-    </div>
+      </div>
     }
 }
 
@@ -49,18 +55,21 @@ pub fn MissionListPage() -> impl IntoView {
         .map(|i| {
             let mission = MISSIONS.get(i).unwrap().clone();
             view! {
-                <a href=format!("/missions/{}",i+1) class="flex flex-col p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{mission.name}</h5>
+              <a
+                href=format!("/missions/{}", i + 1)
+                class="flex flex-col p-6 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {mission.name}
+                </h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">{mission.description}</p>
-            </a>
+              </a>
             }
         })
         .collect_view();
 
     view! {
-        <h1 class="text-6xl font-bold text-gray-800 text-center mb-4">Missions</h1>
-        <div class="flex flex-grow flex-col w-9/10 pb-20 gap-1">
-                {missions_list_view}
-        </div>
+      <h1 class="mb-4 text-6xl font-bold text-center text-gray-800">Missions</h1>
+      <div class="flex flex-col flex-grow gap-1 pb-20 w-9/10">{missions_list_view}</div>
     }
 }

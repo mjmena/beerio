@@ -39,7 +39,7 @@ pub struct Mission {
     name: String,
     description: String,
     #[serde(default)] // Makes this optional
-needs_random_item: bool,
+    needs_random_item: bool,
     // #[serde(default)] // Makes this optional
     // needs_random_kart: bool,
     // #[serde(default)] // Makes this optional
