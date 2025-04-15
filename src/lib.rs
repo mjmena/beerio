@@ -20,7 +20,7 @@ use serde::Deserialize;
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-      <Router base="/beerio">
+      <Router>
         <Routes fallback=|| RandomPage>
           <ParentRoute path=path!("") view=Layout>
             <Route path=path!("") view=RandomPage />
