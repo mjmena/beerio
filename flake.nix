@@ -7,8 +7,16 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, fenix, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      fenix,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
 
@@ -28,18 +36,19 @@
           cargo-generate
           trunk
           tailwindcss_4
-          stylance-cli
+          rustywind
           leptosfmt
         ];
       in
       {
-        devShells.default = pkgs.mkShell.override
-          {
-            stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv;
-          }
-          {
-            buildInputs = leptosPackages;
-          };
+        devShells.default =
+          pkgs.mkShell.override
+            {
+              stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv;
+            }
+            {
+              buildInputs = leptosPackages;
+            };
       }
     );
 }
