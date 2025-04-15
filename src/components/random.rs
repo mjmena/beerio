@@ -15,7 +15,7 @@ pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
         <img
           class="object-contain size-40"
           src=move || {
-            format!("{}/assets/items/{}.png", url().path(), ITEMS.get(item_id()).unwrap())
+            format!("{}assets/items/{}.png", url().path(), ITEMS.get(item_id()).unwrap())
           }
         />
       </div>
