@@ -22,7 +22,7 @@ pub fn RandomPage() -> impl IntoView {
     let get_seed = Signal::derive(move || string_to_sha256(&get_seed()));
 
     view! {
-      <div class="flex flex-col items-center h-screen min-h-screen bg-gray-100">
+      <div class="grid grid-cols-2 h-screen min-h-screen bg-gray-100">
         <RandomMissionDisplay get_seed get_player=|| 1 />
         <RandomMissionDisplay get_seed get_player=|| 2 />
         <RandomItemDisplay get_seed />

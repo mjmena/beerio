@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use leptos_router::{
-    components::{ParentRoute, Route, Router, Routes},
+    components::{Route, Router, Routes},
     path,
 };
 use std::sync::LazyLock;
@@ -12,8 +12,6 @@ mod pages;
 use pages::{
     mission_pages::{MissionListPage, MissionPage},
     random_page::RandomPage,
-    seed_form::SeedForm,
-    seed_view::SeedView,
 };
 use serde::Deserialize;
 
@@ -24,10 +22,8 @@ pub fn App() -> impl IntoView {
         <Layout>
           <Routes fallback=|| "error">
             <Route path=path!("/") view=RandomPage />
-            // <Route path=path!("seed") view=SeedForm />
             <Route path=path!("missions") view=MissionListPage />
             <Route path=path!("missions/:mission") view=MissionPage />
-          // <Route path=path!("seed/:seed/:player") view=SeedView />
           </Routes>
         </Layout>
       </Router>
