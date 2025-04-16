@@ -6,7 +6,7 @@ TODO
   - [x] display round information
   - [x] allow player to navigate between rounds
 - [ ] generate random mission requirements if necessary
-  - [ ] random items
+  - [x] random items
   - [ ] random karts
   - [ ] random wheels
   - [ ] random gliders
