@@ -26,7 +26,7 @@ pub fn MissionPage() -> impl IntoView {
         <div class="flex absolute bottom-0 gap-x-4 justify-center w-full max-w-md">
           <Show when=move || { mission_id() > 1 }>
             <div class="flex-grow w-1/2">
-              <A href=move || format!("/missions/{}", mission_id() - 1)>
+              <A href=move || format!("{}", mission_id() - 1)>
                 <Button>
                   <div>PREVIOUS</div>
                   <div>MISSION</div>
@@ -36,7 +36,7 @@ pub fn MissionPage() -> impl IntoView {
           </Show>
           <Show when=move || { mission_id() < MISSIONS.len() }>
             <div class="flex-grow w-1/2">
-              <A href=move || format!("/missions/{}", mission_id() + 1)>
+              <A href=move || format!("{}", mission_id() + 1)>
                 <Button>
                   <div>NEXT</div>
                   <div>MISSION</div>
@@ -56,7 +56,7 @@ pub fn MissionListPage() -> impl IntoView {
             let mission = MISSIONS.get(i).unwrap().clone();
             view! {
               <a
-                href=format!("/missions/{}", i + 1)
+                href=format!("missions/{}", i + 1)
                 class="flex flex-col p-6 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

@@ -1,12 +1,13 @@
 use leptos::prelude::*;
 use leptos_router::components::{A, Outlet};
-use leptos_router::hooks::use_url;
 
 #[component]
 pub fn Layout() -> impl IntoView {
     view! {
       <div class="w-screen h-screen min-h-screen bg-gray-100">
-        <div class="flex flex-col items-center pb-16 w-full h-full">layout update <Outlet /></div>
+        <div class="flex flex-col items-center pb-16 w-full h-full">
+          <Outlet />
+        </div>
       </div>
       <Navbar />
     }
@@ -68,6 +69,9 @@ pub fn Navbar() -> impl IntoView {
 
 #[component]
 pub fn NavbarLink(href: String, children: Children) -> impl IntoView {
-    let url = use_url();
-    view! { <A href=move || url().path().to_owned() + &href.clone()>{children()}</A> }
+    view! {
+      <A href=href.clone() attr:class="flex flex-col justify-center items-center p-2">
+        {children()}
+      </A>
+    }
 }

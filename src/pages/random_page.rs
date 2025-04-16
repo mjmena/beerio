@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use leptos_router::hooks::query_signal;
+use leptos_router::hooks::{use_navigate, use_query_map};
 use rand::{Rng, distr::Alphanumeric, rng};
 use sha2::{Digest, Sha256};
 
@@ -8,15 +8,18 @@ use crate::components::random::{RandomItemDisplay, RandomLoadoutDisplay, RandomM
 
 #[component]
 pub fn RandomPage() -> impl IntoView {
-    let (get_seed, set_seed) = query_signal::<String>("seed");
+    let get_seed = || use_query_map().read().get("seed").unwrap_or_default();
 
     Effect::new_sync(move || {
-        if get_seed().is_none() {
-            set_seed(Some(generate_random_string(5)));
+        if get_seed().is_empty() {
+            use_navigate()(
+                &format!("/?seed={}", generate_random_string(5)),
+                Default::default(),
+            );
         }
     });
 
-    let get_seed = Signal::derive(move || string_to_sha256(&get_seed().unwrap_or_default()));
+    let get_seed = Signal::derive(move || string_to_sha256(&get_seed()));
 
     view! {
       <div class="flex flex-col items-center h-screen min-h-screen bg-gray-100">

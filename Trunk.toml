@@ -1,2 +1,9 @@
 [tools]
 tailwindcss = "4.0.15"
+[watch]
+watch = ["src"]
+[build]
+release = true
+public_url = "/beerio"
+
+
