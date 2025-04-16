@@ -2,12 +2,10 @@ use leptos::prelude::*;
 use leptos_router::components::{A, Outlet};
 
 #[component]
-pub fn Layout() -> impl IntoView {
+pub fn Layout(children: Children) -> impl IntoView {
     view! {
       <div class="w-screen h-screen min-h-screen bg-gray-100">
-        <div class="flex flex-col items-center pb-16 w-full h-full">
-          <Outlet />
-        </div>
+        <div class="flex flex-col items-center pb-16 w-full h-full">{children()}</div>
       </div>
       <Navbar />
     }
@@ -34,7 +32,7 @@ pub fn Navbar() -> impl IntoView {
           </svg>
           Missions
         </NavbarLink>
-        <NavbarLink href="".to_string()>
+        <NavbarLink href=".".to_string()>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-6 h-6"
@@ -46,7 +44,7 @@ pub fn Navbar() -> impl IntoView {
           </svg>
           Randomizers
         </NavbarLink>
-        <NavbarLink href="seed".to_string()>
+        <NavbarLink href="/".to_string()>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="w-6 h-6"

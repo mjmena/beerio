@@ -26,7 +26,7 @@ pub fn MissionPage() -> impl IntoView {
         <div class="flex absolute bottom-0 gap-x-4 justify-center w-full max-w-md">
           <Show when=move || { mission_id() > 1 }>
             <div class="flex-grow w-1/2">
-              <A href=move || format!("{}", mission_id() - 1)>
+              <A href=move || format!("../{}", mission_id() - 1)>
                 <Button>
                   <div>PREVIOUS</div>
                   <div>MISSION</div>
@@ -36,7 +36,7 @@ pub fn MissionPage() -> impl IntoView {
           </Show>
           <Show when=move || { mission_id() < MISSIONS.len() }>
             <div class="flex-grow w-1/2">
-              <A href=move || format!("{}", mission_id() + 1)>
+              <A href=move || format!("../{}", mission_id() + 1)>
                 <Button>
                   <div>NEXT</div>
                   <div>MISSION</div>

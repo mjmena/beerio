@@ -20,16 +20,16 @@ use serde::Deserialize;
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-      <Router base="/beerio/">
-        <Routes fallback=|| RandomPage>
-          <ParentRoute path=path!("") view=Layout>
-            <Route path=path!("") view=RandomPage />
-            <Route path=path!("/seed") view=SeedForm />
+      <Router base="/beerio">
+        <Layout>
+          <Routes fallback=|| "error">
+            <Route path=path!("/") view=RandomPage />
+            // <Route path=path!("seed") view=SeedForm />
             <Route path=path!("missions") view=MissionListPage />
             <Route path=path!("missions/:mission") view=MissionPage />
-            <Route path=path!("/seed/:seed/:player") view=SeedView />
-          </ParentRoute>
-        </Routes>
+          // <Route path=path!("seed/:seed/:player") view=SeedView />
+          </Routes>
+        </Layout>
       </Router>
     }
 }
