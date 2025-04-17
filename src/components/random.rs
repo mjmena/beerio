@@ -51,13 +51,13 @@ pub fn RandomMissionDisplay(
     }
 }
 
-#[component]
-pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl IntoView {
-    let rng = move || ChaCha20Rng::from_seed(get_seed());
-    let get_number = move || rng().random_range(0..number);
-
-    view! { <div>{move || get_number() + 1}</div> }
-}
+// #[component]
+// pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl IntoView {
+//     let rng = move || ChaCha20Rng::from_seed(get_seed());
+//     let get_number = move || rng().random_range(0..number);
+//
+//     view! { <div>{move || get_number() + 1}</div> }
+// }
 
 fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
     // Create a stable seed from the input string
@@ -176,7 +176,7 @@ pub static GLIDERS: [&str; 15] = [
     "Paraglider",
 ];
 
-pub static CHARACTERS: [&str; 47] = [
+pub static _CHARACTERS: [&str; 47] = [
     "Baby Daisy",
     "Baby Luigi",
     "Baby Mario",

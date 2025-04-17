@@ -1,17 +1,15 @@
 use leptos::prelude::*;
-use leptos_router::{
-    components::{Route, Router, Routes},
-    path,
-};
+use leptos_router::components::{Route, Router, Routes};
+use leptos_router::path;
 use std::sync::LazyLock;
-
-use components::layout::Layout;
 
 mod components;
 mod pages;
+
 use pages::{
     mission_pages::{MissionListPage, MissionPage},
     random_page::RandomPage,
+    splash_page::SplashPage,
 };
 use serde::Deserialize;
 
@@ -19,13 +17,12 @@ use serde::Deserialize;
 pub fn App() -> impl IntoView {
     view! {
       <Router base="/beerio">
-        <Layout>
-          <Routes fallback=|| "error">
-            <Route path=path!("/") view=RandomPage />
-            <Route path=path!("missions") view=MissionListPage />
-            <Route path=path!("missions/:mission") view=MissionPage />
-          </Routes>
-        </Layout>
+        <Routes fallback=|| "error">
+          <Route path=path!("/") view=SplashPage />
+          <Route path=path!("solo") view=RandomPage />
+          <Route path=path!("missions") view=MissionListPage />
+          <Route path=path!("missions/:mission") view=MissionPage />
+        </Routes>
       </Router>
     }
 }

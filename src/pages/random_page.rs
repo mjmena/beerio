@@ -4,7 +4,10 @@ use leptos_router::hooks::{use_navigate, use_query_map};
 use rand::{Rng, distr::Alphanumeric, rng};
 use sha2::{Digest, Sha256};
 
-use crate::components::random::{RandomItemDisplay, RandomLoadoutDisplay, RandomMissionDisplay};
+use crate::components::{
+    layout::Layout,
+    random::{RandomItemDisplay, RandomLoadoutDisplay, RandomMissionDisplay},
+};
 
 #[component]
 pub fn RandomPage() -> impl IntoView {
@@ -22,12 +25,14 @@ pub fn RandomPage() -> impl IntoView {
     let get_seed = Signal::derive(move || string_to_sha256(&get_seed()));
 
     view! {
-      <div class="grid grid-cols-2 h-screen min-h-screen bg-gray-100">
-        <RandomMissionDisplay get_seed get_player=|| 1 />
-        <RandomMissionDisplay get_seed get_player=|| 2 />
-        <RandomItemDisplay get_seed />
-        <RandomLoadoutDisplay get_seed />
-      </div>
+      <Layout>
+        <div class="grid grid-cols-2 h-screen min-h-screen bg-transparent">
+          <RandomMissionDisplay get_seed get_player=|| 1 />
+          <RandomMissionDisplay get_seed get_player=|| 2 />
+          <RandomItemDisplay get_seed />
+          <RandomLoadoutDisplay get_seed />
+        </div>
+      </Layout>
     }
 }
 
