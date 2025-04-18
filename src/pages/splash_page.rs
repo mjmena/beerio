@@ -14,7 +14,7 @@ pub fn SplashPage() -> impl IntoView {
           <Icon icon=icondata::IoPerson attr:class="size-40 fill-red-500" />
           <h2 class="text-5xl font-bold text-center text-red-500">SOLO MISSIONS</h2>
         </a>
-        <a href="./beerio/test" class="flex flex-col">
+        <a href="/beerio/test" class="flex flex-col">
           <div class="flex justify-center items-center">
             <Icon icon=icondata::IoPerson attr:class="size-40 fill-red-500" />
             <Icon icon=icondata::IoPerson attr:class="size-40 fill-green-500" />
