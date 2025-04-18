@@ -5,12 +5,17 @@ TODO
 - [x] create a round system to allow quickly getting a new unqiue mission
   - [x] display round information
   - [x] allow player to navigate between rounds
-- [ ] generate random mission requirements if necessary
+- [x] generate random mission requirements if necessary
   - [x] random items
-  - [ ] random karts
-  - [ ] random wheels
-  - [ ] random gliders
-- [x] navigation bar
+  - [x] random karts
+  - [x] random wheels
+  - [x] random gliders
+- [ ] navigation bar
   - [x] homepage
 - [ ] beerio kart rule page
 - [ ] mission showcase page
+- [ ] add coop missions
+    - [x] item checker
+- [ ] design nicer layout for coop
+- [ ] design nicer layout for splash
+- [ ] gather assets for kart loadouts
