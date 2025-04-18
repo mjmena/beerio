@@ -1,3 +1,4 @@
+use components::item_toggle::ItemToggleDisplay;
 use leptos::prelude::*;
 use leptos_router::components::{Route, Router, Routes};
 use leptos_router::path;
@@ -20,6 +21,7 @@ pub fn App() -> impl IntoView {
         <Routes fallback=|| "error">
           <Route path=path!("/") view=SplashPage />
           <Route path=path!("solo") view=SoloRandomPage />
+          <Route path=path!("test") view=ItemToggleDisplay />
           <Route path=path!("missions") view=MissionListPage />
           <Route path=path!("missions/:mission") view=MissionPage />
         </Routes>
