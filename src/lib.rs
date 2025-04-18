@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_router::components::{Route, Router, Routes};
 use leptos_router::path;
+use pages::random_page::SoloRandomPage;
 use std::sync::LazyLock;
 
 mod components;
@@ -8,7 +9,6 @@ mod pages;
 
 use pages::{
     mission_pages::{MissionListPage, MissionPage},
-    random_page::RandomPage,
     splash_page::SplashPage,
 };
 use serde::Deserialize;
@@ -19,7 +19,7 @@ pub fn App() -> impl IntoView {
       <Router base="/beerio">
         <Routes fallback=|| "error">
           <Route path=path!("/") view=SplashPage />
-          <Route path=path!("solo") view=RandomPage />
+          <Route path=path!("solo") view=SoloRandomPage />
           <Route path=path!("missions") view=MissionListPage />
           <Route path=path!("missions/:mission") view=MissionPage />
         </Routes>

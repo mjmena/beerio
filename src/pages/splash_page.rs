@@ -1,12 +1,14 @@
 use leptos::prelude::*;
 use leptos_icons::Icon;
 
+use crate::pages::random_page::generate_random_string;
+
 #[component]
 pub fn SplashPage() -> impl IntoView {
     view! {
-      <div class="flex flex-col justify-around items-center h-full bg-transparent">
+      <div class="flex flex-col justify-around items-center h-screen bg-transparent">
         <a
-          href="./solo"
+          href=format!("/beerio/solo?seed={}", generate_random_string())
           class="flex flex-col items-center p-20 bg-amber-200 rounded-full border-4 border-amber-300"
         >
           <Icon icon=icondata::IoPerson attr:class="size-40 fill-red-500" />
