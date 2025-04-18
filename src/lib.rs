@@ -33,10 +33,10 @@ pub struct Mission {
     description: String,
     #[serde(default)] // Makes this optional
     needs_random_item: bool,
-    // #[serde(default)] // Makes this optional
-    // needs_random_kart: bool,
-    // #[serde(default)] // Makes this optional
-    // needs_random_wheel: bool,
+    #[serde(default)] // Makes this optional
+    needs_random_loadout: bool,
+    #[serde(default)] // Makes this optional
+    needs_random_number: usize,
     // #[serde(default)] // Makes this optional
     // needs_random_glider: bool,
 }

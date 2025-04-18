@@ -24,10 +24,8 @@ description = "Can only start drinking in 1st place. You can keep drinking even 
 
 [[missions]]
 name = "Randomizer"
-description = "Random character, kart, and wheel selection. https://perchance.org/mario-kart-8-deluxe-randomizer  40 karts, 22 tires, 14 gliders"
-needs_random_kart = true
-needs_random_wheel = true
-needs_random_glider = true
+description = "Use this random loadout."
+needs_random_loadout = true
 
 [[missions]]
 name = "Sheep"
@@ -69,7 +67,7 @@ description = "Can only drink while Lakitu is carrying you."
 [[missions]]
 name = "Tavern Brawler"
 description = "Roll a d4, that is the only race you can drink your entire beer."
-
+needs_random_number = 4
 [[missions]]
 name = "Collateral Damage"
 description = "Get hit by a blue shell while it isn't locked onto you, OR get hit by a bullet bill."

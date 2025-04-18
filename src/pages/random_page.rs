@@ -68,17 +68,23 @@ pub fn RandomMissionDisplay(
         <Show when=move || mission().needs_random_item>
           <RandomItemDisplay get_seed />
         </Show>
+        <Show when=move || mission().needs_random_loadout>
+          <RandomLoadoutDisplay get_seed />
+        </Show>
+        <Show when=move || { mission().needs_random_number > 0 }>
+          <RandomNumberDisplay get_seed number=mission().needs_random_number />
+        </Show>
       </div>
     }
 }
 
-// #[component]
-// pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl IntoView {
-//     let rng = move || ChaCha20Rng::from_seed(get_seed());
-//     let get_number = move || rng().random_range(0..number);
-//
-//     view! { <div>{move || get_number() + 1}</div> }
-// }
+#[component]
+pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl IntoView {
+    let rng = move || ChaCha20Rng::from_seed(get_seed());
+    let get_number = move || rng().random_range(0..number);
+
+    view! { <div class="text-xl">{move || get_number() + 1}</div> }
+}
 
 fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
     // Create a stable seed from the input string
