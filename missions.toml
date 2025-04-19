@@ -1,3 +1,7 @@
+#################################################
+# Solo Missions
+
+#############################
 # Good Missions
 
 [[missions]]
@@ -88,6 +92,7 @@ details = ["Running into their hazardous behind counts."]
 name = "Gary Oak"
 description = "The first player who pisses you off during the Gran Prix is your rival. You must hit them 3 times."
 
+#############################
 # Niche Missions
 
 [[missions]]
@@ -135,7 +140,148 @@ details = ["You can waive a single race. Save this for any mistakes."]
 name = "Drowning in Sorrow"
 description = "You can only drink while submerged in water."
 
+#################################################
 # Coop Missions
 
 [[coopmissions]]
-all_items = true 
+all_items = true
+
+#############################
+# Co-op Gran Prix
+
+[[coop_granprix]]
+name = "Mission Marathon"
+description = "At the start of each race, attempt a single race mission."
+details = ["You lose if you fail *half or more* of these challenges."]
+list_coop_singles = true
+
+[[coop_granprix]]
+name = "Mimicry"
+description = "Two players must finish with the exact same score."
+details = ["For the first half of the races, attempt a single race mission.", "You lose if you fail *more than half* of the single race challenges"]
+
+[[coop_granprix]]
+name = "Share in the Glory"
+description = "Each player must finish in first. Someone different must always place first."
+details = ["If races outnumber players, no player can have more than two firsts over another player."]
+
+[[coop_granprix]]
+name = "The Perfect Run"
+description = "One player must finish 1st in every race."
+
+[[coop_granprix]]
+name = "Cascade"
+description = "A drink session can only be started once each race. Only one person can drink at a time. When one person finishes, another can start."
+details = ["You can’t partake twice in the same session."]
+
+[[coop_granprix]]
+name = "With Friends Like These"
+description = "Every player must hit each other player once."
+
+[[coop_granprix]]
+name = "Jack of All Trades"
+description = "Every item must be used at least once."
+all_items = true
+
+[[coop_granprix]]
+name = "Blue%"
+description = "One player must dodge a blue shell."
+details = ["While in first, any item use that disrupts or avoids the blue shell counts."]
+all_items = true
+
+[[coop_granprix]]
+name = "Identity Crisis"
+description = "Whenever a lightning bolt or blooper occurs, everyone must pass the controller to another player."
+
+[[coop_granprix]]
+name = "Collectathon"
+description = "At any point in the race, all players must have 10 coins at the same time."
+
+[[coop_granprix]]
+name = "Killing Spree (GP Edition)"
+description = "Computers must be hit a number of times equal to the number of players times 4."
+details = [""]
+
+[[coop_granprix]]
+name = "Soul-locked Drinking (GP Edition)"
+description = "Everyone must drink at the same time."
+
+[[coop_granprix]]
+name = "Get Down Mr. President (GP Edition)"
+description = "Designate one player before the race starts. They can’t get hit more than 6 times *and* must finish 1st - 3rd by the end of the Gran Prix."
+details = ["Shocks don’t count - they are an aspect of nature."]
+
+[[coop_granprix]]
+name = "Tag Team (GP Edition)"
+description = "Break into pairs or triples. If you’re not leading, you must always have line of sight of another teammate."
+details = ["If you aren’t, the person leading must stop accelerating.", "At the start of each race, you can willingly keep or swap your partners."]
+
+#############################
+# Co-op Single Race
+
+[[coop_single]]
+name = "Clean Sweep"
+description = "All players must be in the top placements"
+details = ["Four players must finish as 1, 2, 3, and 4."]
+
+[[coop_single]]
+name = "Closing Time"
+description = "Everyone must finish their beer."
+
+[[coop_single]]
+name = "Shock%"
+description = "One player must shock dodge."
+
+[[coop_single]]
+name = "Initial D"
+description = "Each player must get 1 draft."
+
+[[coop_single]]
+name = "Apes String Together"
+description = "Each player must get fed 1 banana."
+details = ["The banana must be trailing a racer and not lying on the ground."]
+
+[[coop_single]]
+name = "Killing Spree"
+description = "Computers must be hit a number of times equal to the number of players times 2."
+
+[[coop_single]]
+name = "Bullying"
+description = "Designate one CPU before the race starts. They must get hit a number of times equal to the number of players."
+
+[[coop_single]]
+name = "Soul-locked Drinking"
+description = "Everyone must drink at the same time."
+
+[[coop_single]]
+name = "Get Down Mr. President"
+description = "Designate one player before the race starts. They can’t get hit more than 3 times *and* must finish 1st - 3rd."
+details = ["Shocks don’t count - they are an aspect of nature."]
+
+[[coop_single]]
+name = "Tag Team"
+description = "Break into pairs or triples. If you’re not leading, you must always have line of sight of another teammate."
+details = ["If you aren’t, the person leading must stop accelerating."]
+
+[[coop_single]]
+name = "Gacha Addict"
+description = "Collect 4 of these 7 rare items:"
+# Bomb, Horn, Boomerang, Fire, Piranha, Ghost, Crazy Eight
+gacha_items = true
+
+[[coop_single]]
+name = "Hivemind"
+description = "Call out when using an item, everyone else must press the item button."
+
+[[coop_single]]
+name = "YOU - SHALL NOT - PASS"
+description = "Designate one player before the race starts. After the beer line, at no point can no other player pass the designated player."
+
+[[coop_single]]
+name = "Hand Holding"
+description = "Everyone must finish within 2 seconds of each other."
+details = ["Do this by waiting before the finish line on the 3rd lap."]
+
+[[coop_single]]
+name = "Waiting in Line"
+description = "While 1 player is using Bullet Bill, the other players can’t drive."
