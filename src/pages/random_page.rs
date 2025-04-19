@@ -7,7 +7,7 @@ use rand_chacha::ChaCha20Rng;
 use sha2::{Digest, Sha256};
 
 use crate::{
-    COOP_MISSIONS, SOLO_MISSIONS,
+    COOP_MISSIONS, COOP_SINGLE_MISSIONS, SOLO_MISSIONS,
     components::{layout::Layout, mission::MissionView},
 };
 
@@ -33,7 +33,7 @@ pub fn CoopRandomPage() -> impl IntoView {
 
     view! {
       <Layout>
-        <div class="flex flex-col justify-evenly bg-transparent h-9/10">
+        <div class="flex flex-col bg-transparent h-9/10">
           <RandomCoopMissionDisplay get_seed get_player=|| 1 />
         </div>
       </Layout>
@@ -70,6 +70,29 @@ pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
 }
 
 #[component]
+pub fn RandomCoopSingleMissionDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
+    let (get_seed, set_seed) = signal(get_seed());
+
+    let mission_ids =
+        move || generate_numbers_from_hash(get_seed(), 12, 0, COOP_SINGLE_MISSIONS.len() - 1);
+    let mission = Signal::derive(move || {
+        let mission_id = *mission_ids().get(1).unwrap();
+        COOP_SINGLE_MISSIONS.get(mission_id).unwrap().clone()
+    });
+
+    view! {
+      <div class="flex flex-col items-center p-4 m-6 border border-red-100">
+        <MissionView mission />
+        <button
+          class="py-2 px-6 text-white bg-red-500 rounded-full"
+          on:click=move |_| set_seed(string_to_sha256(&hex::encode(get_seed())))
+        >
+          Next Single Mission
+        </button>
+      </div>
+    }
+}
+#[component]
 pub fn RandomCoopMissionDisplay(
     get_seed: Signal<[u8; 32]>,
     get_player: impl Fn() -> usize + Send + Sync + 'static,
@@ -83,6 +106,9 @@ pub fn RandomCoopMissionDisplay(
     view! {
       <div class="flex flex-col items-center">
         <MissionView mission />
+        <Show when=move || mission.get().needs_coop_singles>
+          <RandomCoopSingleMissionDisplay get_seed />
+        </Show>
       </div>
     }
 }
