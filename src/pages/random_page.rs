@@ -118,7 +118,7 @@ pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl In
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let get_number = move || rng().random_range(0..number);
 
-    let icon = move || match get_number() {
+    let icon = move || match get_number() + 1 {
         1 => icondata::LuDice1,
         2 => icondata::LuDice2,
         3 => icondata::LuDice3,
