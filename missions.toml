@@ -1,3 +1,5 @@
+# Good Missions
+
 [[missions]]
 name = "Last Minute"
 description = "Drink only during the 3rd lap of each race."
@@ -80,6 +82,10 @@ description = "Designate a player at the start. Get hit by that player twice. Ru
 name = "Gary Oak"
 description = "The first player who pisses you off is your rival. You must hit them a number of times equal to half of the number of races."
 
+# Niche Missions
+name = "Collateral Damage"
+description = "Get hit by a blue shell while it isn’t locked onto you, OR get hit by a bullet bill."
+
 [[missions]]
 name = "Secret Santa"
 description = "Bestow 3 positive effects to others with any rotating item around you. This is a hard to see visual effect - the item isn't consumed."
@@ -111,6 +117,12 @@ description = "Can only use the rear camera while in first."
 [[missions]]
 name = "Double or Nothing"
 description = "You can not pick up single item containers. You are allowed to slip up on 1 race only."
+
+[[missions]]
+name = "Drowning in Sorrow"
+descripion = "You can only drink while submerged in water."
+
+# Coop Missions
 
 [[coopmissions]]
 all_items = true 
