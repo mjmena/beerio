@@ -30,14 +30,14 @@
         ];
 
         # Packages needed for Leptos development
-        leptosPackages = with pkgs; [
-          toolchain
-          cargo-leptos
-          cargo-generate
-          trunk
-          tailwindcss_4
+        packages = with pkgs; [
           rustywind
           leptosfmt
+        ];
+        buildInputs = with pkgs; [
+          toolchain
+          trunk
+          tailwindcss_4
         ];
       in
       {
@@ -47,8 +47,10 @@
               stdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.clangStdenv;
             }
             {
-              buildInputs = leptosPackages;
+              inherit packages;
+              inherit buildInputs;
             };
       }
+
     );
 }
