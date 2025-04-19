@@ -55,7 +55,10 @@ pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
 #[component]
 pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let rng = move || ChaCha20Rng::from_seed(get_seed());
-    let get_character_id = move || rng().random_range(0..CHARACTERS.len());
+    let get_character = move || {
+        let id = rng().random_range(0..CHARACTERS.len());
+        CHARACTERS.get(id).unwrap().to_string()
+    };
     let get_kart = move || {
         let id = rng().random_range(0..KARTS.len());
         KARTS.get(id).unwrap().to_string()
@@ -71,7 +74,13 @@ pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     view! {
       <div class="flex flex-wrap justify-center p-4">
         <div class="flex flex-col justify-end size-40">
-          {move || CHARACTERS.get(get_character_id()).unwrap().to_string()}
+          <img
+            src=move || {
+              format!("assets/characters/{}.webp", get_character().to_lowercase().replace(" ", "_"))
+            }
+            class="object-scale-down"
+          />
+          {move || get_character().to_string()}
         </div>
         <div class="flex flex-col justify-end size-40">
           <img
