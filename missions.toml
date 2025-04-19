@@ -118,7 +118,7 @@ description = "You can not pick up single item containers. You are allowed to sl
 
 [[missions]]
 name = "Drowning in Sorrow"
-descripion = "You can only drink while submerged in water."
+description = "You can only drink while submerged in water."
 
 # Coop Missions
 
