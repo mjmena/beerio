@@ -200,7 +200,6 @@ description = "At any point in the race, all players must have 10 coins at the s
 [[coop_granprix]]
 name = "Killing Spree (GP Edition)"
 description = "Computers must be hit a number of times equal to the number of players times 4."
-details = [""]
 
 [[coop_granprix]]
 name = "Soul-locked Drinking (GP Edition)"
