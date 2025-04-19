@@ -70,9 +70,6 @@ description = "Can only drink while Lakitu is carrying you."
 name = "Tavern Brawler"
 description = "Roll a d4, that is the only race you can drink your entire beer."
 needs_random_number = 4
-[[missions]]
-name = "Collateral Damage"
-description = "Get hit by a blue shell while it isn't locked onto you, OR get hit by a bullet bill."
 
 [[missions]]
 name = "Masochist"
@@ -83,6 +80,7 @@ name = "Gary Oak"
 description = "The first player who pisses you off is your rival. You must hit them a number of times equal to half of the number of races."
 
 # Niche Missions
+[[missions]]
 name = "Collateral Damage"
 description = "Get hit by a blue shell while it isn’t locked onto you, OR get hit by a bullet bill."
 
