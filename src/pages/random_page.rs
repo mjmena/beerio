@@ -56,15 +56,48 @@ pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
 pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let get_character_id = move || rng().random_range(0..CHARACTERS.len());
-    let get_kart_id = move || rng().random_range(0..KARTS.len());
-    let get_wheel_id = move || rng().random_range(0..WHEELS.len());
-    let get_glider_id = move || rng().random_range(0..GLIDERS.len());
+    let get_kart = move || {
+        let id = rng().random_range(0..KARTS.len());
+        KARTS.get(id).unwrap().to_string()
+    };
+    let get_wheel = move || {
+        let id = rng().random_range(0..WHEELS.len());
+        WHEELS.get(id).unwrap().to_string()
+    };
+    let get_glider = move || {
+        let id = rng().random_range(0..GLIDERS.len());
+        GLIDERS.get(id).unwrap().to_string()
+    };
     view! {
-      <div class="p-4">
-        <div>{move || CHARACTERS.get(get_character_id()).unwrap().to_string()}</div>
-        <div>{move || KARTS.get(get_kart_id()).unwrap().to_string()}</div>
-        <div>{move || WHEELS.get(get_wheel_id()).unwrap().to_string()}</div>
-        <div>{move || GLIDERS.get(get_glider_id()).unwrap().to_string()}</div>
+      <div class="flex flex-wrap justify-center p-4">
+        <div class="flex flex-col justify-end size-40">
+          {move || CHARACTERS.get(get_character_id()).unwrap().to_string()}
+        </div>
+        <div class="flex flex-col justify-end size-40">
+          <img
+            src=move || format!("assets/karts/{}.webp", get_kart().to_lowercase().replace(" ", "_"))
+            class="object-scale-down"
+          />
+          {move || get_kart()}
+        </div>
+        <div class="flex flex-col justify-end size-40">
+          <img
+            src=move || {
+              format!("assets/wheels/{}.webp", get_wheel().to_lowercase().replace(" ", "_"))
+            }
+            class="object-scale-down"
+          />
+          {move || get_wheel().to_string()}
+        </div>
+        <div class="flex flex-col justify-end size-40">
+          <img
+            src=move || {
+              format!("assets/gliders/{}.webp", get_glider().to_lowercase().replace(" ", "_"))
+            }
+            class="object-scale-down"
+          />
+          {move || get_glider().to_string()}
+        </div>
       </div>
     }
 }
@@ -180,7 +213,7 @@ pub static ITEMS: [&str; 22] = [
     "blooper",
     "crazy_eight",
 ];
-pub static KARTS: [&str; 37] = [
+pub static KARTS: [&str; 36] = [
     "Standard Kart",
     "Pipe Frame",
     "B Dasher",
@@ -195,7 +228,6 @@ pub static KARTS: [&str; 37] = [
     "Landship",
     "Sneeker",
     "Sports Coupe",
-    "Gold Standard",
     "GLA",
     "W 25 Silver Arrow",
     "300 SL Roadster",
@@ -218,8 +250,9 @@ pub static KARTS: [&str; 37] = [
     "Yoshi Bike",
     "Master Cycle Zero",
     "City Tripper",
+    // "Gold Standard",
 ];
-pub static WHEELS: [&str; 22] = [
+pub static WHEELS: [&str; 21] = [
     "Standard",
     "Monster",
     "Roller",
@@ -237,13 +270,13 @@ pub static WHEELS: [&str; 22] = [
     "Crimson Slim",
     "Cyber Slick",
     "Retro Off-Road",
-    "Gold Tires",
     "GLA Tires",
     "Triforce Tires",
     "Leaf Tires",
     "Ancient Tires",
+    // "Gold Tires",
 ];
-pub static GLIDERS: [&str; 15] = [
+pub static GLIDERS: [&str; 14] = [
     "Super Glider",
     "Cloud Glider",
     "Wario Wing",
@@ -255,10 +288,10 @@ pub static GLIDERS: [&str; 15] = [
     "Bowser Kite",
     "Plane Glider",
     "MKTV Parafoil",
-    "Gold Glider",
     "Hylian Kite",
     "Paper Glider",
     "Paraglider",
+    // "Gold Glider",
 ];
 
 pub static CHARACTERS: [&str; 47] = [
