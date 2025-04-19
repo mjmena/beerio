@@ -2,7 +2,7 @@ use leptos::prelude::*;
 use leptos_router::{components::A, hooks::use_params_map};
 
 use crate::{
-    MISSIONS,
+    SOLO_MISSIONS,
     components::{css::Button, mission::MissionView},
 };
 
@@ -18,7 +18,7 @@ pub fn MissionPage() -> impl IntoView {
             .parse::<usize>()
             .unwrap_or(1)
     };
-    let mission = Signal::derive(move || MISSIONS.get(mission_id() - 1).unwrap().clone());
+    let mission = Signal::derive(move || SOLO_MISSIONS.get(mission_id() - 1).unwrap().clone());
 
     view! {
       <div class="flex relative flex-col h-full">
@@ -34,7 +34,7 @@ pub fn MissionPage() -> impl IntoView {
               </A>
             </div>
           </Show>
-          <Show when=move || { mission_id() < MISSIONS.len() }>
+          <Show when=move || { mission_id() < SOLO_MISSIONS.len() }>
             <div class="flex-grow w-1/2">
               <A href=move || format!("../{}", mission_id() + 1)>
                 <Button>
@@ -51,9 +51,9 @@ pub fn MissionPage() -> impl IntoView {
 
 #[component]
 pub fn MissionListPage() -> impl IntoView {
-    let missions_list_view = (0..MISSIONS.len())
+    let missions_list_view = (0..SOLO_MISSIONS.len())
         .map(|i| {
-            let mission = MISSIONS.get(i).unwrap().clone();
+            let mission = SOLO_MISSIONS.get(i).unwrap().clone();
             view! {
               <a
                 href=format!("missions/{}", i + 1)

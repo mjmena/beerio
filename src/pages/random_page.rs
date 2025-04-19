@@ -1,12 +1,13 @@
 use leptos::prelude::*;
 
+use leptos_icons::Icon;
 use leptos_router::hooks::use_query_map;
 use rand::{Rng, SeedableRng, distr::Alphanumeric, rng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 use sha2::{Digest, Sha256};
 
 use crate::{
-    MISSIONS,
+    COOP_MISSIONS, SOLO_MISSIONS,
     components::{layout::Layout, mission::MissionView},
 };
 
@@ -18,8 +19,22 @@ pub fn SoloRandomPage() -> impl IntoView {
     view! {
       <Layout>
         <div class="flex flex-col justify-evenly bg-transparent h-9/10">
-          <RandomMissionDisplay get_seed get_player=|| 1 />
-          <RandomMissionDisplay get_seed get_player=|| 2 />
+          <RandomSoloMissionDisplay get_seed get_player=|| 1 />
+          <RandomSoloMissionDisplay get_seed get_player=|| 2 />
+        </div>
+      </Layout>
+    }
+}
+
+#[component]
+pub fn CoopRandomPage() -> impl IntoView {
+    let get_seed_query = || use_query_map().read().get("seed").unwrap_or_default();
+    let get_seed = Signal::derive(move || string_to_sha256(&get_seed_query()));
+
+    view! {
+      <Layout>
+        <div class="flex flex-col justify-evenly bg-transparent h-9/10">
+          <RandomCoopMissionDisplay get_seed get_player=|| 1 />
         </div>
       </Layout>
     }
@@ -40,11 +55,13 @@ pub fn RandomItemDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
 #[component]
 pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
     let rng = move || ChaCha20Rng::from_seed(get_seed());
+    let get_character_id = move || rng().random_range(0..CHARACTERS.len());
     let get_kart_id = move || rng().random_range(0..KARTS.len());
     let get_wheel_id = move || rng().random_range(0..WHEELS.len());
     let get_glider_id = move || rng().random_range(0..GLIDERS.len());
     view! {
       <div class="p-4">
+        <div>{move || CHARACTERS.get(get_character_id()).unwrap().to_string()}</div>
         <div>{move || KARTS.get(get_kart_id()).unwrap().to_string()}</div>
         <div>{move || WHEELS.get(get_wheel_id()).unwrap().to_string()}</div>
         <div>{move || GLIDERS.get(get_glider_id()).unwrap().to_string()}</div>
@@ -53,14 +70,32 @@ pub fn RandomLoadoutDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoView {
 }
 
 #[component]
-pub fn RandomMissionDisplay(
+pub fn RandomCoopMissionDisplay(
     get_seed: Signal<[u8; 32]>,
     get_player: impl Fn() -> usize + Send + Sync + 'static,
 ) -> impl IntoView {
-    let mission_ids = move || generate_numbers_from_hash(get_seed(), 12, 0, MISSIONS.len() - 1);
+    let mission_ids =
+        move || generate_numbers_from_hash(get_seed(), 12, 0, COOP_MISSIONS.len() - 1);
     let mission = Signal::derive(move || {
         let mission_id = *mission_ids().get(get_player() - 1).unwrap();
-        MISSIONS.get(mission_id).unwrap().clone()
+        COOP_MISSIONS.get(mission_id).unwrap().clone()
+    });
+    view! {
+      <div class="flex flex-col items-center">
+        <MissionView mission />
+      </div>
+    }
+}
+#[component]
+pub fn RandomSoloMissionDisplay(
+    get_seed: Signal<[u8; 32]>,
+    get_player: impl Fn() -> usize + Send + Sync + 'static,
+) -> impl IntoView {
+    let mission_ids =
+        move || generate_numbers_from_hash(get_seed(), 12, 0, SOLO_MISSIONS.len() - 1);
+    let mission = Signal::derive(move || {
+        let mission_id = *mission_ids().get(get_player() - 1).unwrap();
+        SOLO_MISSIONS.get(mission_id).unwrap().clone()
     });
     view! {
       <div class="flex flex-col items-center">
@@ -83,7 +118,16 @@ pub fn RandomNumberDisplay(get_seed: Signal<[u8; 32]>, number: usize) -> impl In
     let rng = move || ChaCha20Rng::from_seed(get_seed());
     let get_number = move || rng().random_range(0..number);
 
-    view! { <div class="text-xl">{move || get_number() + 1}</div> }
+    let icon = move || match get_number() {
+        1 => icondata::LuDice1,
+        2 => icondata::LuDice2,
+        3 => icondata::LuDice3,
+        4 => icondata::LuDice4,
+        5 => icondata::LuDice5,
+        6 => icondata::LuDice6,
+        _ => icondata::LuDices,
+    };
+    view! { <Icon icon=icon() attr:class="size-40" /> }
 }
 
 fn generate_numbers_from_hash(seed: [u8; 32], count: usize, min: usize, max: usize) -> Vec<usize> {
@@ -203,7 +247,7 @@ pub static GLIDERS: [&str; 15] = [
     "Paraglider",
 ];
 
-pub static _CHARACTERS: [&str; 47] = [
+pub static CHARACTERS: [&str; 47] = [
     "Baby Daisy",
     "Baby Luigi",
     "Baby Mario",

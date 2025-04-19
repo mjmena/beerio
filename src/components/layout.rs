@@ -33,7 +33,7 @@ pub fn Navbar() -> impl IntoView {
           <Icon icon=icondata::IoHome attr:class="size-15 fill-red-500" />
         </A>
         <A
-          href=move || format!("/beerio/solo?seed={}", get_next_seed())
+          href=move || format!("./?seed={}", get_next_seed())
           attr:class="flex flex-col justify-center items-center"
         >
           <Icon icon=icondata::IoDice attr:class="size-30 fill-red-500" />
