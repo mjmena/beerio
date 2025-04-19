@@ -8,7 +8,7 @@ use crate::pages::random_page::generate_random_string;
 pub fn Layout(children: Children) -> impl IntoView {
     view! {
       <div class="w-screen h-screen min-h-screen bg-gray-100">
-        <div class="flex flex-col items-center pb-16 w-full h-full bg-transparent">
+        <div class="flex overflow-scroll flex-col items-center pb-16 w-full h-full bg-transparent">
           {children()}
         </div>
       </div>
@@ -38,8 +38,8 @@ pub fn Navbar() -> impl IntoView {
         >
           <Icon icon=icondata::IoDice attr:class="size-30 fill-red-500" />
         </A>
-        <A href="/beerio/" attr:class="flex flex-col justify-center items-center">
-          <Icon icon=icondata::BsSignStop attr:class="size-15 fill-red-500" />
+        <A href="./missions/" attr:class="flex flex-col justify-center items-center">
+          <Icon icon=icondata::LuList attr:class="size-15 stroke-red-500 fill-red-500" />
         </A>
       </nav>
     }

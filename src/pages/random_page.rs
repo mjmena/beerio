@@ -75,14 +75,14 @@ pub fn RandomCoopSingleMissionDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoVi
 
     let mission_ids =
         move || generate_numbers_from_hash(get_seed(), 12, 0, COOP_SINGLE_MISSIONS.len() - 1);
-    let mission = Signal::derive(move || {
+    let get_mission = Signal::derive(move || {
         let mission_id = *mission_ids().get(1).unwrap();
         COOP_SINGLE_MISSIONS.get(mission_id).unwrap().clone()
     });
 
     view! {
       <div class="flex flex-col items-center p-4 m-6 border border-red-100">
-        <MissionView mission />
+        <MissionView get_mission get_seed />
         <button
           class="py-2 px-6 text-white bg-red-500 rounded-full"
           on:click=move |_| set_seed(string_to_sha256(&hex::encode(get_seed())))
@@ -99,16 +99,13 @@ pub fn RandomCoopMissionDisplay(
 ) -> impl IntoView {
     let mission_ids =
         move || generate_numbers_from_hash(get_seed(), 12, 0, COOP_MISSIONS.len() - 1);
-    let mission = Signal::derive(move || {
+    let get_mission = Signal::derive(move || {
         let mission_id = *mission_ids().get(get_player() - 1).unwrap();
         COOP_MISSIONS.get(mission_id).unwrap().clone()
     });
     view! {
       <div class="flex flex-col items-center">
-        <MissionView mission />
-        <Show when=move || mission.get().needs_coop_singles>
-          <RandomCoopSingleMissionDisplay get_seed />
-        </Show>
+        <MissionView get_mission get_seed />
       </div>
     }
 }
@@ -119,22 +116,13 @@ pub fn RandomSoloMissionDisplay(
 ) -> impl IntoView {
     let mission_ids =
         move || generate_numbers_from_hash(get_seed(), 12, 0, SOLO_MISSIONS.len() - 1);
-    let mission = Signal::derive(move || {
+    let get_mission = Signal::derive(move || {
         let mission_id = *mission_ids().get(get_player() - 1).unwrap();
         SOLO_MISSIONS.get(mission_id).unwrap().clone()
     });
     view! {
       <div class="flex flex-col items-center">
-        <MissionView mission />
-        <Show when=move || mission().needs_random_item>
-          <RandomItemDisplay get_seed />
-        </Show>
-        <Show when=move || mission().needs_random_loadout>
-          <RandomLoadoutDisplay get_seed />
-        </Show>
-        <Show when=move || { mission().needs_random_number > 0 }>
-          <RandomNumberDisplay get_seed number=mission().needs_random_number />
-        </Show>
+        <MissionView get_mission get_seed />
       </div>
     }
 }
@@ -322,6 +310,7 @@ pub static CHARACTERS: [&str; 47] = [
     "Wario",
     "Waluigi",
 ];
+
 pub fn generate_random_string() -> String {
     rng()
         .sample_iter(&Alphanumeric)
@@ -330,7 +319,7 @@ pub fn generate_random_string() -> String {
         .collect()
 }
 
-fn string_to_sha256(input: &str) -> [u8; 32] {
+pub fn string_to_sha256(input: &str) -> [u8; 32] {
     let mut hasher = Sha256::new();
     hasher.update(input.as_bytes());
     hasher.finalize().into()

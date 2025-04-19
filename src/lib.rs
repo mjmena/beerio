@@ -1,16 +1,16 @@
 use leptos::prelude::*;
 use leptos_router::components::{Route, Router, Routes};
 use leptos_router::path;
+use pages::mission_pages::{
+    CoopMissionListPage, CoopMissionPage, SoloMissionListPage, SoloMissionPage,
+};
 use pages::random_page::{CoopRandomPage, SoloRandomPage};
 use std::sync::LazyLock;
 
 mod components;
 mod pages;
 
-use pages::{
-    mission_pages::{MissionListPage, MissionPage},
-    splash_page::SplashPage,
-};
+use pages::splash_page::SplashPage;
 use serde::Deserialize;
 
 #[component]
@@ -20,9 +20,11 @@ pub fn App() -> impl IntoView {
         <Routes fallback=|| SplashPage>
           <Route path=path!("/") view=SplashPage />
           <Route path=path!("solo") view=SoloRandomPage />
-          <Route path=path!("test") view=CoopRandomPage />
-          <Route path=path!("missions") view=MissionListPage />
-          <Route path=path!("missions/:mission") view=MissionPage />
+          <Route path=path!("coop") view=CoopRandomPage />
+          <Route path=path!("solo/missions") view=SoloMissionListPage />
+          <Route path=path!("solo/missions/:id") view=SoloMissionPage />
+          <Route path=path!("coop/missions") view=CoopMissionListPage />
+          <Route path=path!("coop/missions/:id") view=CoopMissionPage />
         </Routes>
       </Router>
     }
