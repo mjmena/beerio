@@ -1,10 +1,9 @@
 [tools]
 tailwindcss = "4.0.15"
+
 [watch]
 watch = ["src"]
-[build]
-# release = true
-# public_url = "/beerio"
+
 [serve]
-address="0.0.0.0"
+addresses=["0.0.0.0"]
 

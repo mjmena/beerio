@@ -64,7 +64,7 @@ jobs:
         run: ./trunk build --release --public-url "${GITHUB_REPOSITORY#*/}"
 
       - name: make 404
-        run: cp dist/index.html 404.html
+        run: cp dist/index.html dist/404.html
 
       # Deploy to gh-pages branch
       # - name: Deploy 🚀
