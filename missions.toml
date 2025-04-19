@@ -153,12 +153,13 @@ all_items = true
 name = "Mission Marathon"
 description = "At the start of each race, attempt a single race mission."
 details = ["You lose if you fail *half or more* of these challenges."]
-list_coop_singles = true
+needs_coop_singles = true
 
 [[coop_granprix]]
 name = "Mimicry"
 description = "Two players must finish with the exact same score."
 details = ["For the first half of the races, attempt a single race mission.", "You lose if you fail *more than half* of the single race challenges"]
+needs_coop_singles = true
 
 [[coop_granprix]]
 name = "Share in the Glory"
@@ -187,7 +188,6 @@ all_items = true
 name = "Blue%"
 description = "One player must dodge a blue shell."
 details = ["While in first, any item use that disrupts or avoids the blue shell counts."]
-all_items = true
 
 [[coop_granprix]]
 name = "Identity Crisis"
@@ -214,6 +214,11 @@ details = ["Shocks don’t count - they are an aspect of nature."]
 name = "Tag Team (GP Edition)"
 description = "Break into pairs or triples. If you’re not leading, you must always have line of sight of another teammate."
 details = ["If you aren’t, the person leading must stop accelerating.", "At the start of each race, you can willingly keep or swap your partners."]
+
+[[coop_granprix]]
+name = "Squad Goals"
+description = "Every player must use the same random loadout."
+needs_random_loadout = true 
 
 #############################
 # Co-op Single Race
@@ -266,7 +271,7 @@ details = ["If you aren’t, the person leading must stop accelerating."]
 name = "Gacha Addict"
 description = "Collect 4 of these 7 rare items:"
 # Bomb, Horn, Boomerang, Fire, Piranha, Ghost, Crazy Eight
-gacha_items = true
+needs_gacha_items = true
 
 [[coop_single]]
 name = "Hivemind"
