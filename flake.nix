@@ -34,8 +34,9 @@
           rustywind
           leptosfmt
         ];
-        buildInputs = with pkgs; [
+        nativeBuildInputs = with pkgs; [
           toolchain
+          wasm-bindgen-cli
           trunk
           tailwindcss_4
         ];
@@ -48,8 +49,22 @@
             }
             {
               inherit packages;
-              inherit buildInputs;
+              inherit nativeBuildInputs;
             };
+        packages.githubPagesWasmBundle = pkgs.rustPlatform.buildRustPackage {
+          inherit nativeBuildInputs;
+          pname = "beerio";
+          version = "0.0.1";
+          src = pkgs.lib.cleanSource ./.;
+          cargoLock = {
+            lockFile = ./Cargo.lock;
+          };
+          buildPhase = "trunk build --release --public-url \${GITHUB_REPOSITORY#*/}";
+          installPhase = ''
+            cp dist/index.html dist/404.html
+            cp -r dist $out
+          '';
+        };
       }
 
     );
