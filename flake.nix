@@ -9,7 +9,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       fenix,
       flake-utils,
@@ -59,7 +58,7 @@
           cargoLock = {
             lockFile = ./Cargo.lock;
           };
-          buildPhase = "trunk build --release --public-url \${GITHUB_REPOSITORY#*/}";
+          buildPhase = "trunk build --release --public-url mjmena/beerio";
           installPhase = ''
             cp dist/index.html dist/404.html
             cp -r dist $out
