@@ -143,8 +143,6 @@ description = "You can only drink while submerged in water."
 #################################################
 # Coop Missions
 
-[[coopmissions]]
-all_items = true
 
 #############################
 # Co-op Gran Prix
@@ -271,7 +269,7 @@ details = ["If you aren’t, the person leading must stop accelerating."]
 name = "Gacha Addict"
 description = "Collect 4 of these 7 rare items:"
 # Bomb, Horn, Boomerang, Fire, Piranha, Ghost, Crazy Eight
-needs_gacha_items = true
+needs_gacha_item_checklist = true
 
 [[coop_single]]
 name = "Hivemind"

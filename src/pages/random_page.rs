@@ -222,6 +222,17 @@ pub static ITEMS: [&str; 22] = [
     "blooper",
     "crazy_eight",
 ];
+
+pub static GACHA_ITEMS: [&str; 7] = [
+    "bob-omb",
+    "super_horn",
+    "boomerang_flower",
+    "fire_flower",
+    "piranha_plant",
+    "boo",
+    "crazy_eight",
+];
+
 pub static KARTS: [&str; 36] = [
     "Standard Kart",
     "Pipe Frame",

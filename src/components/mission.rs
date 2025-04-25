@@ -2,8 +2,8 @@ use crate::{
     Mission,
     components::item_toggle::ItemToggleDisplay,
     pages::random_page::{
-        RandomCoopSingleMissionDisplay, RandomItemDisplay, RandomLoadoutDisplay,
-        RandomNumberDisplay,
+        GACHA_ITEMS, ITEMS, RandomCoopSingleMissionDisplay, RandomItemDisplay,
+        RandomLoadoutDisplay, RandomNumberDisplay,
     },
 };
 use leptos::prelude::*;
@@ -50,7 +50,12 @@ pub fn MissionView(
         </Show>
         <Show when=move || get_mission.get().needs_item_checklist>
           <div class="p-2 text-left">
-            <ItemToggleDisplay />
+            <ItemToggleDisplay items=ITEMS.into() />
+          </div>
+        </Show>
+        <Show when=move || get_mission.get().needs_gacha_item_checklist>
+          <div class="p-2 text-left">
+            <ItemToggleDisplay items=GACHA_ITEMS.into() />
           </div>
         </Show>
         <Show when=move || get_mission.get().needs_coop_singles>

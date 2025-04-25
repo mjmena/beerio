@@ -47,6 +47,8 @@ pub struct Mission {
     #[serde(default, rename = "all_items")]
     needs_item_checklist: bool,
     #[serde(default)]
+    needs_gacha_item_checklist: bool,
+    #[serde(default)]
     needs_coop_singles: bool,
 }
 

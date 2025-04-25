@@ -3,10 +3,10 @@ use leptos::prelude::*;
 use crate::pages::random_page::ITEMS;
 
 #[component]
-pub fn ItemToggleDisplay() -> impl IntoView {
+pub fn ItemToggleDisplay<'a>(items: Vec<&'a str>) -> impl IntoView {
     view! {
       <div class="flex flex-wrap flex-grow justify-evenly items-center">
-        {ITEMS
+        {items
           .into_iter()
           .map(|item| view! { <ItemToggle item=item.to_string() /> })
           .collect_view()}
