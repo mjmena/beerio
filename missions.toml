@@ -239,7 +239,7 @@ name = "Initial D"
 description = "Each player must get 1 draft."
 
 [[coop_single]]
-name = "Apes String Together"
+name = "Apes Strong Together"
 description = "Each player must get fed 1 banana."
 details = ["The banana must be trailing a racer and not lying on the ground."]
 
