@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 
-use crate::pages::random_page::ITEMS;
 
 #[component]
 pub fn ItemToggleDisplay<'a>(items: Vec<&'a str>) -> impl IntoView {
