@@ -14,18 +14,16 @@ description = "*Must* have 5 gulps per race excluding last race."
 
 [[missions]]
 name = "Smuggler"
-description = "Finish *one* race holding or using a powerful item."
+description = "Finish *two* races holding or using a powerful item."
 details = ["Applicable items: Star, lightning, bullet bill, blue shell, golden mushroom, endless 8."]
-200cc_adjustment = "During a 6 race Gran Prix, complete the mission twice."
 
 [[missions]]
 name = "Janitor"
 description = "Clean up a number of stationary non-coin items equal to 2 times the number of races."
-200cc_adjustment = "The amount to clean up is equal to the number of races."
 
 [[missions]]
 name = "Forgot my Keys"
-description = "On each race, Starting after the drink line, you must touch twelfth place."
+description = "On *two* races, starting after the drink line, you must touch twelfth place."
 200cc_adjustment = "During a 6 race Gran Prix, you must follow the rule in only 4 of those races."
 
 [[missions]]
@@ -48,7 +46,7 @@ description = "Hold every item for less than 2 seconds before using it."
 
 [[missions]]
 name = "Locked Out"
-description = "In only *half* of the races, you can't use your first item."
+description = "On *two* races, you can't use your first item."
 
 [[missions]]
 name = "One in the Chamber"
@@ -123,18 +121,12 @@ description = "Mark-drift over 2 coin collections."
 details = ["Mark-drift: Pick up all coins (at least 3) from a string of coins designed to be picked up with proper steering/drifting."]
 
 [[missions]]
-name = "Sticky Keys"
-description = "Turn on auto accelerate. Your controller must be fully put down before drinking."
-
-[[missions]]
 name = "Watch Your Back"
 description = "While in first, you must toggle rear view camera at least every 2 seconds."
 
 [[missions]]
 name = "Double or Nothing"
-description = "You can not pick up single item containers."
-details = ["You can waive a single race. Save this for any mistakes."]
-200cc_adjustment = "During a 6 race Gran Prix, you waive two races instead."
+description = "You are unable to drink for the rest of the race once you pick up a non-double item block."
 
 [[missions]]
 name = "Drowning in Sorrow"
