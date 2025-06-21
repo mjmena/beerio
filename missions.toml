@@ -102,7 +102,7 @@ details = ["This is a hard to see visual effect - the item isn't consumed."]
 [[missions]]
 name = "Pack Rat"
 description = "If you get 6th or 7th place in the Grand Prix, you win alongside the next best player."
-details = ["You must announce your mission at the start of the Gran Prix"], "Deep inside, you didn't win."]
+details = ["You must announce your mission at the start of the Gran Prix", "Deep inside, you didn't win."]
 
 [[missions]]
 name = "Bumper Cars"
