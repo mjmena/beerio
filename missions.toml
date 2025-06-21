@@ -1,4 +1,4 @@
-#################################################
+ils#################################################
 # Solo Missions
 
 #############################
@@ -38,6 +38,7 @@ needs_random_loadout = true
 [[missions]]
 name = "Sheep"
 description = "Can only start a drink after someone else puts down their drink."
+details = ["You must announce your mission at the start of the Gran Prix"]
 
 [[missions]]
 name = "Item Masher"
@@ -101,15 +102,12 @@ details = ["This is a hard to see visual effect - the item isn't consumed."]
 [[missions]]
 name = "Pack Rat"
 description = "If you get 6th or 7th place in the Grand Prix, you win alongside the next best player."
-details = ["Deep inside, you didn't win."]
-
-[[missions]]
-name = "No One's Main"
-description = "Race using an inside-drifting bike."
+details = ["You must announce your mission at the start of the Gran Prix"], "Deep inside, you didn't win."]
 
 [[missions]]
 name = "Bumper Cars"
 description = "Must bump every player without any attacks from either side."
+details = ["You must announce your mission at the start of the Gran Prix"]
 
 [[missions]]
 name = "The Mark"
