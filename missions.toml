@@ -19,17 +19,16 @@ details = ["Applicable items: Star, lightning, bullet bill, blue shell, golden m
 
 [[missions]]
 name = "Janitor"
-description = "Clean up a number of stationary non-coin items equal to 2 times the number of races."
+description = "Clean up 8 stationary non-coin items."
 
 [[missions]]
 name = "Forgot my Keys"
 description = "On *two* races, starting after the drink line, you must touch twelfth place."
-200cc_adjustment = "During a 6 race Gran Prix, you must follow the rule in only 4 of those races."
 
 [[missions]]
 name = "Showboating"
 description = "Can only start drinking in 1st place."
-details = ["You can keep drinking even if you leave 1st place."]
+details = ["You can keep drinking even if you leave 1st place.", "If you pause your chug and you're no longer in first, stop drinking."]
 
 [[missions]]
 name = "Randomizer"
@@ -69,12 +68,13 @@ description = "Start drinking in an odd numbered place, stop drinking in an odd 
 details = ["You're playing with fire if you are pushing on 11th."]
 
 [[missions]]
-name = "Pay to Win"
+name = "Banker"
 description = "Drink while only at 10 coins."
 
 [[missions]]
 name = "Designated Driver"
 description = "Can only drink while Lakitu is carrying you."
+details = ["You are permitted 1 addition gulp upon landing."]
 
 [[missions]]
 name = "Tavern Brawler"
@@ -92,10 +92,6 @@ description = "The first player who pisses you off during the Gran Prix is your 
 
 #############################
 # Niche Missions
-
-[[missions]]
-name = "Collateral Damage"
-description = "Get hit by a blue shell while it isn’t locked onto you, *or* get hit by a bullet bill."
 
 [[missions]]
 name = "Secret Santa"
