@@ -95,6 +95,14 @@ description = "The first player who pisses you off during the Gran Prix is your 
 # Niche Missions
 
 [[missions]]
+name = "Too Shocked To Drink"
+description = "Can only have 1 drink session per race. If you’re shocked, you can’t drink. If you are drinking when shocked, put down your drink."
+details = ["If you start drinking on lap 1, you can only drink 4 gulps."
+"If you start drinking on lap 2, you can only drink 7 gulps."
+"If you start drinking on lap 3, you can drink as long as you aren’t shocked."
+"On race 4 lap 3, you can finish your drink."]
+
+[[missions]]
 name = "Secret Santa"
 description = "Bestow 3 positive effects to others with any rotating item around you."
 details = ["This is a hard to see visual effect - the item isn't consumed."]
