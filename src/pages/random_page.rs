@@ -123,7 +123,7 @@ pub fn RandomCoopSingleMissionDisplay(get_seed: Signal<[u8; 32]>) -> impl IntoVi
     });
 
     view! {
-      <div class="flex flex-col items-center p-4 m-6 border border-red-100 overflow-y-scroll">
+      <div class="flex overflow-y-scroll flex-col items-center p-4 m-6 border border-red-100">
         <MissionView get_mission get_seed />
         <button
           class="py-2 px-6 text-white bg-red-500 rounded-full"

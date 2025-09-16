@@ -18,7 +18,7 @@ pub fn App() -> impl IntoView {
     view! {
       <Router base="/beerio">
         <Routes fallback=|| SplashPage>
-          <Route path=path!("/") view=SplashPage />
+  <Route path=path!("/") view=SplashPage />
           <Route path=path!("solo") view=SoloRandomPage />
           <Route path=path!("coop") view=CoopRandomPage />
           <Route path=path!("solo/missions") view=SoloMissionListPage />
